@@ -2,10 +2,8 @@
 
 
 
-  
 
-
-<html class="theme-next mist use-motion" lang="-zh-Hans -en">
+<html class="theme-next gemini" lang="-zh-Hans -en">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -83,13 +81,16 @@
 
 
 
+<meta name="description" content="你是不是缺心眼儿">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Sands of Time">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="The Sands of Time">
+<meta property="og:description" content="你是不是缺心眼儿">
 <meta property="og:locale" content="-zh-Hans -en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Sands of Time">
+<meta name="twitter:description" content="你是不是缺心眼儿">
 
 
 
@@ -97,12 +98,12 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: 'Author'
@@ -144,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-right 
+  <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -161,7 +162,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">时之沙</p>
       
   </div>
 
@@ -186,7 +187,37 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
           </a>
         </li>
       
@@ -196,7 +227,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -207,6 +238,16 @@
               <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
             
             Schedule
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
           </a>
         </li>
       
@@ -256,9 +297,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/2018-03-23/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HsiaoyangWu">
+      <meta itemprop="name" content="Leon Wu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -282,7 +323,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-23T00:05:24+08:00">
                 2018-03-23
@@ -335,35 +376,293 @@
       
         
           
-            <p>#Digit Recognizer</p>
-<p>作为本人入门机器学习所做的第二个项目，并没有很难（毕竟是入门级），但却给了我很宝贵的实际操作经验，不仅认识了 KNN , LR ,SVM等三个算法的优缺点，亦学习到一种降维手段PCA。代码后面有空补上</p>
-<p>###1.KNN</p>
-<p>第一次见到这个题目，就是在《机器学习实战》的第二章所描述的K-临近算法当中。KNN算法是一个很古老的算法，这个过时的算法现在业界基本已经没人没有使用了。但是作为入门学到的第一个算法，还是实践下比较好。</p>
-<p>KNN算法其实非常直观，就是看和哪个数字比较像，就判断为哪个数字，类似于我们的死记硬背模式。虽然有点土，但是理论上完全说得过去。</p>
-<p>直观而言，KNN算法就是计算训练集中样本与测试集的特征维度空间距离（简称距离），最终选出与测试集距离排行最小的的K个样本，作为判断测试集的标准，是哪个数字就判断为哪个数字。</p>
-<p>在测试过程中发现KNN运算耗时非常久，久到离谱（我可以吃个饭再回来），因此对调试参数失去耐心，匆忙结束。</p>
-<p>最终得分有0.96左右</p>
-<p>###2.LR</p>
-<p>Logistic Regression也就是传说中的万金油算法，主要适用于线性问题，但应付各种题目都有不错的得分。</p>
-<p>但是这里显然不太适合用LR，因为这个题目偏于非线性，但其实最后结果也不是很差。</p>
-<p>个人对这个算法的直观看法，就是评估每个像素点，颜色深一点可能偏向于判断目标数字，或者偏向其他数字。但其实数字对于人而言主要依靠结构识别。我们对于文字的识别大多是根据它们的结构，因此LR容易受到干扰的因素广泛存在。</p>
-<p>另外一个点 ，LR训练慢（相对于KNN以及SVM已经比较快了）但是测试快。最终得分能有0.92左右</p>
-<h3 id="3-PCA-SVM"><a href="#3-PCA-SVM" class="headerlink" title="3.PCA+SVM"></a>3.PCA+SVM</h3><p><strong>先说PCA</strong></p>
-<blockquote>
-<p>主成分分析（Principal Component Analysis，PCA），是一种统计方法。通过正交变换将一组可能存在相关性的变量转换为一组线性不相关的变量，转换后的这组变量叫主成分。</p>
-</blockquote>
-<p>简单直观而言，就是降维，将样本原来的n维空间通过消减维度变为k维空间。</p>
-<p>举个梨，全班同学的成绩语文相差很大，从50到90分布，但是英语成绩大家都考到90多分，如果两个成绩都用同样的比重区分排名，那么英语的作用就不这么明显，而且需要考虑两科成绩。<br>这时如果我新建一个新变量，对两科取不同权重，这样计算出来的新维度即能<strong>保留原来的特征</strong>，又能达到<strong>降维</strong>的效果。</p>
-<p><strong>然后是SVM</strong></p>
-<p>就是支持向量机，起源久远，可以追溯到1956年的感知机算法（感知机算法的目的是通过不断的试错寻找一个合适的超平面<em>hyperplane</em>）</p>
-<p>支持向量机算法的学习策略是在训练集中寻找一个超平面，将n维空间分隔开，两类不同的数据分处超平面的正负向，并使间隔最大化。而两类数据距离超平面最近的数据点，就是支持向量。</p>
-<p>最终得分0.98</p>
-<p>具体的介绍和数学推导可参考</p>
-<p><a href="https://blog.csdn.net/v_july_v/article/details/7624837" target="_blank" rel="noopener">https://blog.csdn.net/v_july_v/article/details/7624837</a></p>
-<p>代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span>  numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment">#import time</span></span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="comment">#read data</span></span><br><span class="line">pca=PCA(n_components=<span class="number">0.95</span>,whiten=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'reading data...'</span>)</span><br><span class="line">train = pd.read_csv(<span class="string">"D:/python learning/digit/train .csv"</span>)</span><br><span class="line">test = pd.read_csv(<span class="string">"D:/python learning/digit/test .csv"</span>)</span><br><span class="line">label = train.values[<span class="number">0</span>:,<span class="number">0</span>].astype(int)</span><br><span class="line">data_train = train.values[<span class="number">0</span>:,<span class="number">1</span>:].astype(int)</span><br><span class="line">data_test = test.values[:,:].astype(int)</span><br><span class="line"></span><br><span class="line">pca.fit(data_train)</span><br><span class="line">train_data=pca.transform(data_train)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'training svc...'</span>)</span><br><span class="line">svc=SVC()</span><br><span class="line">svc.fit(train_data,label)</span><br><span class="line"></span><br><span class="line">data_test=pca.transform(data_test)</span><br><span class="line">ans = svc.predict(data_test)</span><br><span class="line"></span><br><span class="line">a=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(ans)):</span><br><span class="line">    a.append(i+<span class="number">1</span>)</span><br><span class="line">np.savetxt(<span class="string">'PCA_0.95_SVC.csv'</span>,np.c_[a,ans],delimiter=<span class="string">','</span>,header=<span class="string">'ImageId,Label'</span>,comments=<span class="string">''</span>,fmt=<span class="string">'%d'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'finished'</span>)</span><br></pre></td></tr></table></figure>
+          #Digit Recognizer
+作为本人入门机器学习所做的第二个项目，并没有很难（毕竟是入门级），但却给了我很宝贵的实际操作经验，不仅认识了 KNN , LR ,SVM等三个算法的优缺点，亦学习到一种降维手段PCA。代码后面有空补上
+###1.KNN
+第一次见到这个题目，就是在《机器学习实战》的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/23/2018-03-23/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/12/2018-3-12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leon Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The Sands of Time">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/12/2018-3-12/" itemprop="url">leetcode 初体验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-12T09:39:43+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/12/2018-3-12/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/12/2018-3-12/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          最近一直在学习C++以及数据结构、算法，在网上找资料的时候发现了leetcode、codewar等OJ网站，尝试一下发现里面的题目都很经典，因此这四天一直在刷，目前已经完成了初级算法部分，想记录下个人所得，下个难度以后再找时间做做。
+leetcode官网https://leetcode.com/  
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/12/2018-3-12/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/08/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leon Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The Sands of Time">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/08/hello-world/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-08T18:36:05+08:00">
+                2018-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/08/hello-world/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/08/hello-world/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/08/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -400,10 +699,6 @@
   </section>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
 
 
           </div>
@@ -426,6 +721,8 @@
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -436,8 +733,12 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">HsiaoyangWu</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <img class="site-author-image" itemprop="image"
+                src="/images/CropTmpFile-1477116557107.jpg"
+                alt="Leon Wu" />
+            
+              <p class="site-author-name" itemprop="name">Leon Wu</p>
+              <p class="site-description motion-element" itemprop="description">你是不是缺心眼儿</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -448,7 +749,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -462,11 +763,47 @@
           
 
           
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/#/user/home?id=99959008" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-globe"></i>网易云音乐</a>
+                  </span>
+                
+            </div>
+          
 
           
           
 
           
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                神奇的链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.uisdc.com/" title="优设" target="_blank">优设</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.zhangxinxu.com/" title="张鑫旭" target="_blank">张鑫旭</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cn.soulmachine.me/" title="灵魂机器" target="_blank">灵魂机器</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.bilibili.com/video/av6211226/" title="尼古拉·特斯拉：发明了现代世界的人" target="_blank">尼古拉·特斯拉：发明了现代世界的人</a>
+                  </li>
+                
+              </ul>
+            </div>
           
 
           
@@ -488,29 +825,53 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">HsiaoyangWu</span>
+  <span class="author" itemprop="copyrightHolder">Leon Wu</span>
 
   
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
 
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a>
+<span>   |   </span>
+<span id="showDays"></span>
+</div>
+
+
+
+
+<script>
+  var seconds = 1000;
+  var minutes = seconds * 60;
+  var hours = minutes * 60;
+  var days = hours * 24;
+  var years = days * 365;
+  var birthDay = Date.UTC(2016,05,16,00,00,00); // 这里设置建站时间
+  setInterval(function() {
+    var today = new Date();
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth()+1;
+    var todayDate = today.getDate();
+    var todayHour = today.getHours();
+    var todayMinute = today.getMinutes();
+    var todaySecond = today.getSeconds();
+    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+    var diff = now - birthDay;
+    var diffYears = Math.floor(diff/years);
+    var diffDays = Math.floor((diff/days)-diffYears*365);
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+      document.getElementById('showDays').innerHTML="本站已运行 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+  }, 1000);
+</script>
         
 
 
@@ -526,6 +887,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
@@ -612,6 +975,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
 
