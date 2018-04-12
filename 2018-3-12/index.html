@@ -3,7 +3,7 @@
 
 
 
-<html class="theme-next pisces" lang="-zh-Hans -en">
+<html class="theme-next mist" lang="-zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -40,6 +40,44 @@
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -87,7 +125,7 @@
 <meta property="og:url" content="http://yoursite.com/2018-3-12/index.html">
 <meta property="og:site_name" content="The Sands of Time">
 <meta property="og:description" content="最近一直在学习C++以及数据结构、算法，在网上找资料的时候发现了leetcode、codewar等OJ网站，尝试一下发现里面的题目都很经典，因此这四天一直在刷，目前已经完成了初级算法部分，想记录下个人所得，下个难度以后再找时间做做。 leetcode官网https://leetcode.com/  英语不好的我选择 Leetcode中国 官网https://leetcodechina.com/ 数">
-<meta property="og:locale" content="-zh-Hans -en">
+<meta property="og:locale" content="-zh-Hans">
 <meta property="og:updated_time" content="2018-03-12T01:35:10.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018-3-12">
@@ -99,9 +137,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -139,7 +177,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="-zh-Hans -en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="-zh-Hans">
 
   
   
@@ -237,7 +275,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
             
-            Programma
+            Schedule
           </a>
         </li>
       
@@ -336,16 +374,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
 
   
 
@@ -508,7 +536,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a>
 <span>   |   </span>
 <span id="showDays"></span>
 </div>
@@ -645,13 +673,6 @@
   
   
 
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
@@ -667,26 +688,6 @@
 
   
 
-
-  
-
-    
-      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018-3-12/index.html';
-          this.page.identifier = '2018-3-12/index.html';
-          this.page.title = '2018-3-12';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
 
   
 
@@ -734,28 +735,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
 
   
 
