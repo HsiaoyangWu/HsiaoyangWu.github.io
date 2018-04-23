@@ -117,16 +117,30 @@
 
 
 
-<meta name="description" content="你是不是缺心眼儿">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Sands of Time">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="回归与梯度下降：回归在数学上来说是给定一个点集，能够用一条曲线去拟合之，如果这个曲线是一条直线，那就被称为线性回归，如果曲线是一条二次曲线，就被称为二次回归，回归还有很多的变种，如locally weighted回归，logistic回归，等等，这个将在后面去讲。 用一个很简单的例子来说明回归，这个例子来自很多的地方，也在很多的open source的软件中看到，比如说weka。大概就是，做一个房">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习理解之回归">
+<meta property="og:url" content="http://yoursite.com/2017/03/17/2017-3-17/index.html">
 <meta property="og:site_name" content="The Sands of Time">
-<meta property="og:description" content="你是不是缺心眼儿">
+<meta property="og:description" content="回归与梯度下降：回归在数学上来说是给定一个点集，能够用一条曲线去拟合之，如果这个曲线是一条直线，那就被称为线性回归，如果曲线是一条二次曲线，就被称为二次回归，回归还有很多的变种，如locally weighted回归，logistic回归，等等，这个将在后面去讲。 用一个很简单的例子来说明回归，这个例子来自很多的地方，也在很多的open source的软件中看到，比如说weka。大概就是，做一个房">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/6941baebjw1eu0wgao0e2j206o04bmx1.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/6941baebjw1eu0wgab1n2j206o04m3yg.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/6941baebjw1eu0wga0cxfj208o04w0su.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/6941baebjw1eu0wg9kyq3j206o00tt8k.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/6941baebjw1eu0wg99ywhj203g00uq2q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/6941baebjw1eu0wg90ngfj206o02hq2u.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/6941baebjw1eu0wg8tcm7j209q076q39.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/6941baebjw1eu0wg8cf9sj208f066weo.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/6941baebjw1eu0wg7wrw1j208r06ijrn.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/6941baebjw1eu0wg7oco5j20bz01haa3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/6941baebjw1eu0wg79wrdj209v01ia9z.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/6941baebjw1eu0wg715i8j204r06oaa3.jpg">
+<meta property="og:updated_time" content="2018-04-23T08:39:16.562Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Sands of Time">
-<meta name="twitter:description" content="你是不是缺心眼儿">
+<meta name="twitter:title" content="机器学习理解之回归">
+<meta name="twitter:description" content="回归与梯度下降：回归在数学上来说是给定一个点集，能够用一条曲线去拟合之，如果这个曲线是一条直线，那就被称为线性回归，如果曲线是一条二次曲线，就被称为二次回归，回归还有很多的变种，如locally weighted回归，logistic回归，等等，这个将在后面去讲。 用一个很简单的例子来说明回归，这个例子来自很多的地方，也在很多的open source的软件中看到，比如说weka。大概就是，做一个房">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/mw690/6941baebjw1eu0wgao0e2j206o04bmx1.jpg">
 
 
 
@@ -156,13 +170,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/17/2017-3-17/"/>
 
 
 
 
 
-  <title>The Sands of Time</title>
+  <title>机器学习理解之回归 | The Sands of Time</title>
   
 
 
@@ -181,8 +195,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -349,745 +362,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/2018-03-23/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="The Sands of Time">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/23/2018-03-23/" itemprop="url">Kaggle Digit Recognizer 总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-23T00:05:24+08:00">
-                2018-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Kaggle Digit Recognizer 实战1.KNNKNN算法其实非常直观，就是看和哪个数字比较像，就判断为哪个数字，类似于我们的死记硬背模式。虽然有点土，但是理论上完全说得过去。
-直观而言，KNN算法就是计算训练集中样本与测试集的特征维度空间距离（简称距离），最终选出与测试集距离排行最小
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/23/2018-03-23/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/18/2018-3-18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="The Sands of Time">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/18/2018-3-18/" itemprop="url">Kaggle HousePrice</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T22:05:30+08:00">
-                2018-03-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Kaggle HousePrice题目网址：
-
-https://www.kaggle.com/c/house-prices-advanced-regression-techniques
-
-1.导入模块及读数据12345678910111213141516171819import pandas as 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/18/2018-3-18/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/12/2018-3-12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="The Sands of Time">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/12/2018-3-12/" itemprop="url">leetcode 初体验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T09:39:43+08:00">
-                2018-03-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          最近一直在学习C++以及数据结构、算法，在网上找资料的时候发现了leetcode、codewar等OJ网站，尝试一下发现里面的题目都很经典，因此这四天一直在刷，目前已经完成了初级算法部分，想记录下个人所得，下个难度以后再找时间做做。
-leetcode官网https://leetcode.com/  
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/12/2018-3-12/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/25/2017-6-25/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="The Sands of Time">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/25/2017-6-25/" itemprop="url">理解 朴素贝叶斯（Naive Bayes）-2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-25T22:05:30+08:00">
-                2017-06-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          机器学习 理解 朴素贝叶斯（Naive Bayes）-2引言主要包括将朴素贝叶斯模型应用到文本分类任务的技巧和方法。
-词袋模型(The Bag of Words Model)对于机器学习算法来说，特征的选择是一个很重要的过程。那么如何从文本训练集中选出好的特征呢？在自然语言处理中，一个常见的模型就是
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/25/2017-6-25/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/20/2017-5-20/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="The Sands of Time">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/20/2017-5-20/" itemprop="url">理解 朴素贝叶斯（Naive Bayes）-1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T22:05:30+08:00">
-                2017-05-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          机器学习理解 朴素贝叶斯（Naive Bayes）-1 本文包括
-
-朴素贝叶斯背后的数学原理
-
-朴素贝叶斯概述众所周知，朴素贝叶斯是一种简单但是非常强大的线性分类器。它在垃圾邮件分类，疾病诊断中都取得了很大的成功。它只所以称为朴素，是因为它假设特征之间是相互独立的，但是在现实生活中，这种假设基本上是
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/20/2017-5-20/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -1117,9 +394,7 @@ leetcode官网https://leetcode.com/
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/17/2017-3-17/" itemprop="url">机器学习理解之回归</a></h1>
+          <h1 class="post-title" itemprop="name headline">机器学习理解之回归</h1>
         
 
         <div class="post-meta">
@@ -1188,19 +463,59 @@ leetcode官网https://leetcode.com/
       
 
       
-        
-          
-          回归与梯度下降：回归在数学上来说是给定一个点集，能够用一条曲线去拟合之，如果这个曲线是一条直线，那就被称为线性回归，如果曲线是一条二次曲线，就被称为二次回归，回归还有很多的变种，如locally weighted回归，logistic回归，等等，这个将在后面去讲。
-用一个很简单的例子来说明回归，这个
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/17/2017-3-17/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <h2 id="回归与梯度下降："><a href="#回归与梯度下降：" class="headerlink" title="回归与梯度下降："></a>回归与梯度下降：</h2><p>回归在数学上来说是给定一个点集，能够用一条曲线去拟合之，如果这个曲线是一条直线，那就被称为线性回归，如果曲线是一条二次曲线，就被称为二次回归，回归还有很多的变种，如locally weighted回归，logistic回归，等等，这个将在后面去讲。</p>
+<p>用一个很简单的例子来说明回归，这个例子来自很多的地方，也在很多的open source的软件中看到，比如说weka。大概就是，做一个房屋价值的评估系统，一个房屋的价值来自很多地方，比如说面积、房间的数量（几室几厅）、地段、朝向等等，这些影响房屋价值的变量被称为特征(feature)，feature在机器学习中是一个很重要的概念，有很多的论文专门探讨这个东西。在此处，为了简单，假设我们的房屋就是一个变量影响的，就是房屋的面积。</p>
+<p>假设有一个房屋销售的数据如下：</p>
+<p>面积(m^2)  销售价钱（万元）</p>
+<p>123            250</p>
+<p>150            320</p>
+<p>87              160</p>
+<p>102            220</p>
+<p>…               …</p>
+<p>这个表类似于帝都5环左右的房屋价钱，我们可以做出一个图，x轴是房屋的面积。y轴是房屋的售价，如下：</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/6941baebjw1eu0wgao0e2j206o04bmx1.jpg" alt=""></p>
+<p>如果来了一个新的面积，假设在销售价钱的记录中没有的，我们怎么办呢？</p>
+<p>我们可以用一条曲线去尽量准的拟合这些数据，然后如果有新的输入过来，我们可以在将曲线上这个点对应的值返回。如果用一条直线去拟合，可能是下面的样子：</p>
+<p><img src="http://ww3.sinaimg.cn/mw690/6941baebjw1eu0wgab1n2j206o04m3yg.jpg" alt=""></p>
+<p>绿色的点就是我们想要预测的点。</p>
+<p>首先给出一些概念和常用的符号，在不同的机器学习书籍中可能有一定的差别。</p>
+<p>房屋销售记录表 &#8211; 训练集(training set)或者训练数据(training data), 是我们流程中的输入数据，一般称为x</p>
+<p>房屋销售价钱 &#8211; 输出数据，一般称为y</p>
+<p>拟合的函数（或者称为假设或者模型），一般写做 y = h(x)</p>
+<p>训练数据的条目数(#training set), 一条训练数据是由一对输入数据和输出数据组成的</p>
+<p>输入数据的维度(特征的个数，#features)，n</p>
+<h2 id="机器学习过程"><a href="#机器学习过程" class="headerlink" title="机器学习过程"></a>机器学习过程</h2><p>首先给出一个输入数据，我们的算法会通过一系列的过程得到一个估计的函数，这个函数有能力对没有见过的新数据给出一个新的估计，也被称为构建一个模型。就如同上面的线性回归函数。</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/6941baebjw1eu0wga0cxfj208o04w0su.jpg" alt=""></p>
+<p>我们用X1，X2..Xn 去描述feature里面的分量，比如x1=房间的面积，x2=房间的朝向，等等，我们可以做出一个估计函数：</p>
+<p><img src="http://ww3.sinaimg.cn/mw690/6941baebjw1eu0wg9kyq3j206o00tt8k.jpg" alt=""></p>
+<p>θ在这儿称为参数，在这儿的意思是调整feature中每个分量的影响力，就是到底是房屋的面积更重要还是房屋的地段更重要。为了如果我们令X0 = 1，就可以用向量的方式来表示了：</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/6941baebjw1eu0wg99ywhj203g00uq2q.jpg" alt=""></p>
+<p>需要一个机制去评估我们θ是否比较好，所以说需要对h函数进行评估，一般这个函数称为损失函数（loss function）或者错误函数(error function)，描述h函数<strong>不好</strong>的程度，称为J函数</p>
+<p>在这儿我们可以做出下面的一个错误函数：</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/6941baebjw1eu0wg90ngfj206o02hq2u.jpg" alt=""></p>
+<p>这个错误估计函数是去对x(i)的估计值与真实值y(i)差的平方和作为错误估计函数，前面乘上的1/2是为了在求导的时候，这个系数就不见了。</p>
+<p>如何调整θ以使得J(θ)取得最小值有很多方法，其中有最小二乘法(min square)，是一种完全是数学描述的方法，在stanford机器学习开放课最后的部分会推导最小二乘法的公式的来源，这个来很多的机器学习和数学书上都可以找到，这里就不提最小二乘法，而谈谈梯度下降法。</p>
+<p>梯度下降法是按下面的流程进行的：</p>
+<p>1）首先对θ赋值，这个值可以是随机的，也可以让θ是一个全零的向量。</p>
+<p>2）改变θ的值，使得J(θ)按梯度下降的方向进行减少。</p>
+<p>为了更清楚，给出下面的图：</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/6941baebjw1eu0wg8tcm7j209q076q39.jpg" alt=""></p>
+<p>这是一个表示参数θ与误差函数J(θ)的关系图，红色的部分是表示J(θ)有着比较高的取值，需要让J(θ)的值尽量的低。也就是深蓝色的部分。θ0，θ1表示θ向量的两个维度。</p>
+<p>梯度下降法的第一步是给θ给一个初值，假设随机给的初值是在图上的十字点。</p>
+<p>将θ按照梯度下降的方向进行调整，就会使得J(θ)往更低的方向进行变化，如图所示，算法的结束将是在θ下降到无法继续下降为止。</p>
+<p><img src="http://ww3.sinaimg.cn/mw690/6941baebjw1eu0wg8cf9sj208f066weo.jpg" alt=""></p>
+<p>当然，可能梯度下降的最终点并非是全局最小点，可能是一个局部最小点，可能是下面的情况：</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/6941baebjw1eu0wg7wrw1j208r06ijrn.jpg" alt=""></p>
+<p>上面这张图就是描述的一个局部最小点，这是我们重新选择了一个初始点得到的，看来我们这个算法将会在很大的程度上被初始点的选择影响而陷入局部最小点</p>
+<p>下面我将用一个例子描述一下梯度减少的过程，对于我们的函数J(θ)求偏导J：（求导的过程如果不明白，可以温习一下微积分）</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/6941baebjw1eu0wg7oco5j20bz01haa3.jpg" alt=""></p>
+<p>下面是更新的过程，也就是θi会向着梯度最小的方向进行减少。θi表示更新之前的值，-后面的部分表示按梯度方向减少的量，α表示步长，也就是每次按照梯度减少的方向变化多少。</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/6941baebjw1eu0wg79wrdj209v01ia9z.jpg" alt=""></p>
+<p>值得注意的是，梯度是有方向的，对于一个向量θ，每一维分量θi都可以求出一个梯度的方向，我们就可以找到一个整体的方向，在变化的时候，我们就朝着下降最多的方向进行变化就可以达到一个最小点，不管它是局部的还是全局的。</p>
+<p>用更简单的数学语言进行描述步骤2）是这样的：</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/6941baebjw1eu0wg715i8j204r06oaa3.jpg" alt=""></p>
+<p>倒三角形表示梯度，按这种方式来表示，θi就不见了，用好向量和矩阵，会大大的简化数学的描述。</p>
+
       
     </div>
     
@@ -1217,12 +532,28 @@ leetcode官网https://leetcode.com/
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/20/2017-5-20/" rel="prev" title="理解 朴素贝叶斯（Naive Bayes）-1">
+                理解 朴素贝叶斯（Naive Bayes）-1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1232,10 +563,11 @@ leetcode官网https://leetcode.com/
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -1243,6 +575,10 @@ leetcode官网https://leetcode.com/
 
 
           
+
+  
+
+
 
         </div>
         
@@ -1265,8 +601,17 @@ leetcode官网https://leetcode.com/
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1350,6 +695,22 @@ leetcode官网https://leetcode.com/
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#回归与梯度下降："><span class="nav-number">1.</span> <span class="nav-text">回归与梯度下降：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习过程"><span class="nav-number">2.</span> <span class="nav-text">机器学习过程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1509,6 +870,10 @@ leetcode官网https://leetcode.com/
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

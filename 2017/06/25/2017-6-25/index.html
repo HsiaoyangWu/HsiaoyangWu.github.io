@@ -117,16 +117,19 @@
 
 
 
-<meta name="description" content="你是不是缺心眼儿">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Sands of Time">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="机器学习 理解 朴素贝叶斯（Naive Bayes）-2引言主要包括将朴素贝叶斯模型应用到文本分类任务的技巧和方法。 词袋模型(The Bag of Words Model)对于机器学习算法来说，特征的选择是一个很重要的过程。那么如何从文本训练集中选出好的特征呢？在自然语言处理中，一个常见的模型就是词袋模型。 这个模型很简单，就是收集训练集中所有的词（重复地只保留一个词），收集的这些词中，每个词都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解 朴素贝叶斯（Naive Bayes）-2">
+<meta property="og:url" content="http://yoursite.com/2017/06/25/2017-6-25/index.html">
 <meta property="og:site_name" content="The Sands of Time">
-<meta property="og:description" content="你是不是缺心眼儿">
+<meta property="og:description" content="机器学习 理解 朴素贝叶斯（Naive Bayes）-2引言主要包括将朴素贝叶斯模型应用到文本分类任务的技巧和方法。 词袋模型(The Bag of Words Model)对于机器学习算法来说，特征的选择是一个很重要的过程。那么如何从文本训练集中选出好的特征呢？在自然语言处理中，一个常见的模型就是词袋模型。 这个模型很简单，就是收集训练集中所有的词（重复地只保留一个词），收集的这些词中，每个词都">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdn.net/20160427232102606">
+<meta property="og:updated_time" content="2018-04-21T11:25:52.204Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Sands of Time">
-<meta name="twitter:description" content="你是不是缺心眼儿">
+<meta name="twitter:title" content="理解 朴素贝叶斯（Naive Bayes）-2">
+<meta name="twitter:description" content="机器学习 理解 朴素贝叶斯（Naive Bayes）-2引言主要包括将朴素贝叶斯模型应用到文本分类任务的技巧和方法。 词袋模型(The Bag of Words Model)对于机器学习算法来说，特征的选择是一个很重要的过程。那么如何从文本训练集中选出好的特征呢？在自然语言处理中，一个常见的模型就是词袋模型。 这个模型很简单，就是收集训练集中所有的词（重复地只保留一个词），收集的这些词中，每个词都">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20160427232102606">
 
 
 
@@ -156,13 +159,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/25/2017-6-25/"/>
 
 
 
 
 
-  <title>The Sands of Time</title>
+  <title>理解 朴素贝叶斯（Naive Bayes）-2 | The Sands of Time</title>
   
 
 
@@ -181,8 +184,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -349,450 +351,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/2018-03-23/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="The Sands of Time">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/23/2018-03-23/" itemprop="url">Kaggle Digit Recognizer 总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-23T00:05:24+08:00">
-                2018-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Kaggle Digit Recognizer 实战1.KNNKNN算法其实非常直观，就是看和哪个数字比较像，就判断为哪个数字，类似于我们的死记硬背模式。虽然有点土，但是理论上完全说得过去。
-直观而言，KNN算法就是计算训练集中样本与测试集的特征维度空间距离（简称距离），最终选出与测试集距离排行最小
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/23/2018-03-23/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/18/2018-3-18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="The Sands of Time">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/18/2018-3-18/" itemprop="url">Kaggle HousePrice</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T22:05:30+08:00">
-                2018-03-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Kaggle HousePrice题目网址：
-
-https://www.kaggle.com/c/house-prices-advanced-regression-techniques
-
-1.导入模块及读数据12345678910111213141516171819import pandas as 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/18/2018-3-18/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/12/2018-3-12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="The Sands of Time">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/12/2018-3-12/" itemprop="url">leetcode 初体验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T09:39:43+08:00">
-                2018-03-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          最近一直在学习C++以及数据结构、算法，在网上找资料的时候发现了leetcode、codewar等OJ网站，尝试一下发现里面的题目都很经典，因此这四天一直在刷，目前已经完成了初级算法部分，想记录下个人所得，下个难度以后再找时间做做。
-leetcode官网https://leetcode.com/  
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/12/2018-3-12/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -822,9 +383,7 @@ leetcode官网https://leetcode.com/
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/25/2017-6-25/" itemprop="url">理解 朴素贝叶斯（Naive Bayes）-2</a></h1>
+          <h1 class="post-title" itemprop="name headline">理解 朴素贝叶斯（Naive Bayes）-2</h1>
         
 
         <div class="post-meta">
@@ -893,19 +452,66 @@ leetcode官网https://leetcode.com/
       
 
       
-        
-          
-          机器学习 理解 朴素贝叶斯（Naive Bayes）-2引言主要包括将朴素贝叶斯模型应用到文本分类任务的技巧和方法。
-词袋模型(The Bag of Words Model)对于机器学习算法来说，特征的选择是一个很重要的过程。那么如何从文本训练集中选出好的特征呢？在自然语言处理中，一个常见的模型就是
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/25/2017-6-25/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <h1 id="机器学习-理解-朴素贝叶斯（Naive-Bayes）-2"><a href="#机器学习-理解-朴素贝叶斯（Naive-Bayes）-2" class="headerlink" title="机器学习 理解 朴素贝叶斯（Naive Bayes）-2"></a>机器学习 理解 朴素贝叶斯（Naive Bayes）-2</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>主要包括将朴素贝叶斯模型应用到文本分类任务的技巧和方法。</p>
+<h2 id="词袋模型-The-Bag-of-Words-Model"><a href="#词袋模型-The-Bag-of-Words-Model" class="headerlink" title="词袋模型(The Bag of Words Model)"></a>词袋模型(The Bag of Words Model)</h2><p>对于机器学习算法来说，特征的选择是一个很重要的过程。那么如何从文本训练集中选出好的特征呢？在自然语言处理中，一个常见的模型就是词袋模型。</p>
+<p>这个模型很简单，<strong>就是收集训练集中所有的词（重复地只保留一个词），收集的这些词中，每个词都是一个特征。这也叫做词汇表。</strong></p>
+<p>当然，在把训练集中的每个文档向量化的过程中，存在两个模型。一个是统计词在文档中出现的次数（多项式模型）;一个是统计词是否在文档中出现过（柏努利模型）。下面我会详细解释这两个模型的。</p>
+<h2 id="关于文本处理的几个技巧"><a href="#关于文本处理的几个技巧" class="headerlink" title="关于文本处理的几个技巧"></a>关于文本处理的几个技巧</h2><ol>
+<li>移除文本中的标点符号并把所有字母转换为小写的</li>
+<li>移除常用的单词： </li>
+</ol>
+<ul>
+<li>在网上找到特定语言的常用词列表</li>
+<li>自己创建一个常用词列表，统计整个训练集中每个词出现的次数，并根据它排序，接着把前n个词从词汇表和每个训练样本中移除</li>
+</ul>
+<ol>
+<li>词干提取(Stemming)：它的意思就是把swim和swimming看作是一个单词。它会把每个相近的词提取主干，并把它们当作一个词。</li>
+<li>词元化(Lemmatization)：它的目的是把让单词之间的语法符合规范。</li>
+<li>N-Gram：这个百度百科上有详细的解释：<a href="http://baike.baidu.com/view/1394579.htm" target="_blank" rel="noopener">http://baike.baidu.com/view/1394579.htm</a>  下图是英文单词的例子：</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20160427232102606" alt="机器学习算法之朴素贝叶斯"></p>
+<p>在实际分类中，词干提取和词元化对分类的性能几乎不会产生什么影响。上面的方法有的不适用于中文的情况。</p>
+<h2 id="Multi-variate-Bernoulli-Naive-Bayes"><a href="#Multi-variate-Bernoulli-Naive-Bayes" class="headerlink" title="Multi-variate Bernoulli Naive Bayes"></a>Multi-variate Bernoulli Naive Bayes</h2><p>这个模型检查词汇表的词是否在文档中出现。根据伯努利实验， 有如下公式：</p>
+<p>$$<br>P(x|ωj)=∏i=1mP(xi|ωj)b∗(1−P(xi|ωj))(1−b)(b∈0,1)<br>$$<br>$$<br>P(x|\omega_j) = \prod^m_{i=1}P(x_i|\omega_j)^b * (1 - P(x_i|\omega_j))^{(1 - b)} \qquad (b \in 0, 1)<br>$$</p>
+<p>上式中的m是词汇表中单词的数量。</p>
+<p>$$<br>P(xi|ωj)=Nxi|wj+1Nwj+2<br>$$<br>$$<br>P(x_i|\omega_j) = \frac{N_{x_i|w_j} + 1}{N_{w_j} + 2}<br>$$</p>
+<ul>
+<li>$Nxi|wjN_{x_i|w_j}$：训练集中包含特征xix_i并属于类别ωj\omega_j样本的数量</li>
+<li>$NwjN_{w_j}$：训练集中属于类别ωj\omega_j样本的数量</li>
+<li>+1、+2+1、+2是Laplace平滑参数</li>
+</ul>
+<h2 id="Multinomial-Naive-Bayes"><a href="#Multinomial-Naive-Bayes" class="headerlink" title="Multinomial Naive Bayes"></a>Multinomial Naive Bayes</h2><p>这个模型检查词汇表的词在文档中出现的次数。它也叫做词频(term frequency)，记作(tf(t, d))，表示词t在文档d中出现的次数。它也叫做自然频率分布(raw frequency)。在实际应用中，为了使算法具有更好的性能，词频经常被标准化，公式如下：</p>
+<p>$$<br>\frac{tf(t,d)}{n_d}<br>$$</p>
+<ul>
+<li>$tf(t,d)$$：词t在文档d中出现的次数</li>
+<li>$n_d$：文档d中词的总数量</li>
+</ul>
+<p>上述中的词都是指词汇表中的词，并不是文档中所有出现的单词。</p>
+<p>基于词汇间的独立性假设， 可得如下公式：</p>
+<p>$$<br>P(x|\omega_j) = P(x_1|\omega_j) <em> P(x_2|\omega_j) </em> P(x_3|\omega_j) <em> \dots </em> P(x_n|\omega_j) = \prod^m_{i=1}P(x_i|\omega_j)<br>$$</p>
+<p>上式中的m是词汇表中单词的数量。</p>
+<p>$$<br>P(x_i|\omega_j) = \frac{\sum tf(x_i, d \in \omega_j) + \alpha}{\sum N_{d \in \omega_j} + \alpha * V}<br>$$</p>
+<ul>
+<li>$∑tf(x_i, d \in \omega_j)$：在所有属于类别ωj\omega_j的训练样本中，词汇(特征)xix_i的词频和</li>
+<li>$∑N_{d \in \omega_j}$：在所有属于类别ωj\omega_j的训练样本中，所有词汇(特征)的词频和</li>
+<li>$\alpha$：An additive smoothing parameter (α = 1 for Laplace smoothing).</li>
+<li>V：词汇表的大小</li>
+</ul>
+<h2 id="Term-Frequency-Inverse-Document-Frequency-Tf-idf"><a href="#Term-Frequency-Inverse-Document-Frequency-Tf-idf" class="headerlink" title="Term Frequency - Inverse Document Frequency (Tf-idf)"></a>Term Frequency - Inverse Document Frequency (Tf-idf)</h2><p> 可以把$Tf-idf$理解成加权重的词频。如果 并没有把频繁出现的词(stop words)从词汇表中移除，那么它是非常有用的。$Tf-idf$认为词的重要性与它在文档中出现的次数成反比。</p>
+<p>$Tf-idf$可以通过朴素贝叶斯应用到文本分类中，公式如下：</p>
+<p>$Tf-idf = tf_n(t,d) * idf(t)$</p>
+<ul>
+<li>$tf_n(t,d)$$是正则化后的词频</li>
+<li>$idf(t)$可通过如下公式计算</li>
+</ul>
+<p>$idf(t) = log \left( \frac{n_d}{n_d(t)} \right)$</p>
+<ul>
+<li>$n_d$：文档的总数</li>
+<li>$n_d(t)$：包含词t的文档数量</li>
+</ul>
+<p>由上面的公式， 也可以看出，当一个词在越多的文档中出现的时候，它的Tf-idf就越小，也就说明它的权重越小。</p>
+<h2 id="Multi-variate-Bernoulli和Multinomial模型的性能"><a href="#Multi-variate-Bernoulli和Multinomial模型的性能" class="headerlink" title="Multi-variate Bernoulli和Multinomial模型的性能"></a>Multi-variate Bernoulli和Multinomial模型的性能</h2><p>如果词汇表是很大的，Multinomial模型的性能要比Multi-variate Bernoulli模型要好。然而，机器学习算法的性能高度依赖于你选择特征的好坏。在朴素贝叶斯用于文本分类的例子中，算法性能的好坏很大程度上取决于我上述所讲技巧应用的好坏。在实际应用中， 可以将这些方法多尝试一下，从而找出最好的模型。</p>
+
       
     </div>
     
@@ -922,161 +528,32 @@ leetcode官网https://leetcode.com/
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/20/2017-5-20/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="The Sands of Time">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/20/2017-5-20/" itemprop="url">理解 朴素贝叶斯（Naive Bayes）-1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T22:05:30+08:00">
-                2017-05-20
-              </time>
+              <a href="/2017/05/20/2017-5-20/" rel="next" title="理解 朴素贝叶斯（Naive Bayes）-1">
+                <i class="fa fa-chevron-left"></i> 理解 朴素贝叶斯（Naive Bayes）-1
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
+              <a href="/2018/03/12/2018-3-12/" rel="prev" title="leetcode 初体验">
+                leetcode 初体验 <i class="fa fa-chevron-right"></i>
+              </a>
             
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          机器学习理解 朴素贝叶斯（Naive Bayes）-1 本文包括
-
-朴素贝叶斯背后的数学原理
-
-朴素贝叶斯概述众所周知，朴素贝叶斯是一种简单但是非常强大的线性分类器。它在垃圾邮件分类，疾病诊断中都取得了很大的成功。它只所以称为朴素，是因为它假设特征之间是相互独立的，但是在现实生活中，这种假设基本上是
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/20/2017-5-20/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1086,156 +563,11 @@ leetcode官网https://leetcode.com/
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/17/2017-3-17/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="The Sands of Time">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/17/2017-3-17/" itemprop="url">机器学习理解之回归</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-17T22:05:30+08:00">
-                2017-03-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          回归与梯度下降：回归在数学上来说是给定一个点集，能够用一条曲线去拟合之，如果这个曲线是一条直线，那就被称为线性回归，如果曲线是一条二次曲线，就被称为二次回归，回归还有很多的变种，如locally weighted回归，logistic回归，等等，这个将在后面去讲。
-用一个很简单的例子来说明回归，这个
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/17/2017-3-17/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -1243,6 +575,10 @@ leetcode官网https://leetcode.com/
 
 
           
+
+  
+
+
 
         </div>
         
@@ -1265,8 +601,17 @@ leetcode官网https://leetcode.com/
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1350,6 +695,22 @@ leetcode官网https://leetcode.com/
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习-理解-朴素贝叶斯（Naive-Bayes）-2"><span class="nav-number">1.</span> <span class="nav-text">机器学习 理解 朴素贝叶斯（Naive Bayes）-2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词袋模型-The-Bag-of-Words-Model"><span class="nav-number">1.2.</span> <span class="nav-text">词袋模型(The Bag of Words Model)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于文本处理的几个技巧"><span class="nav-number">1.3.</span> <span class="nav-text">关于文本处理的几个技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-variate-Bernoulli-Naive-Bayes"><span class="nav-number">1.4.</span> <span class="nav-text">Multi-variate Bernoulli Naive Bayes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multinomial-Naive-Bayes"><span class="nav-number">1.5.</span> <span class="nav-text">Multinomial Naive Bayes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Term-Frequency-Inverse-Document-Frequency-Tf-idf"><span class="nav-number">1.6.</span> <span class="nav-text">Term Frequency - Inverse Document Frequency (Tf-idf)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-variate-Bernoulli和Multinomial模型的性能"><span class="nav-number">1.7.</span> <span class="nav-text">Multi-variate Bernoulli和Multinomial模型的性能</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1509,6 +870,10 @@ leetcode官网https://leetcode.com/
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
