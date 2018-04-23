@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml" />
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Kaggle HousePrice 实战题目网址：  https://www.kaggle.com/c/house-prices-advanced-regression-techniques  1.导入模块及读数据12345678910111213141516171819import pandas as pdimport numpy as npimport seaborn as snsimport">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kaggle HousePrice 实战">
+<meta property="og:url" content="http://yoursite.com/2018/03/18/2018-3-18/index.html">
+<meta property="og:site_name" content="The Sands of Time">
+<meta property="og:description" content="Kaggle HousePrice 实战题目网址：  https://www.kaggle.com/c/house-prices-advanced-regression-techniques  1.导入模块及读数据12345678910111213141516171819import pandas as pdimport numpy as npimport seaborn as snsimport">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/SalePrice_distplot.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDTh4zBVcb33tORPWJoY1YGpxwU7ihPXmv%26q-sign-time%3D1524309393%3B1524311193%26q-key-time%3D1524309393%3B1524311193%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D084ea1fb0e31bc04a3658540233e7b58ae0e7b9f&token=831a6d9c80239904f076dc88f74f1c34bef0f22610001&clientIP=120.236.174.147&clientUA=463f6189-4aa1-4849-abf6-e6b3f15b65b2">
+<meta property="og:image" content="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/corrmap.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDoRr3RH46piCsNQb6LGtDlZX5ZuUReNys%26q-sign-time%3D1524309422%3B1524311222%26q-key-time%3D1524309422%3B1524311222%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D21e1b424a25614a5f00bf27408628c13678731ca&token=54e2fc28975a601f6b4d82a05f2fd85a7d6ec0cf10001&clientIP=120.236.174.147&clientUA=64ecbfdc-b6fc-41f8-a02d-cff42014bd63">
+<meta property="og:image" content="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/GrLiv.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKID8kqPwZPDC0IYa1wnN946V4q9E6zPeQbm%26q-sign-time%3D1524309442%3B1524311242%26q-key-time%3D1524309442%3B1524311242%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Dc655e268f56c29b52b9c5bc8cbafa044050c6325&token=c356e977cb1cc71febcf20a59b80744e382c76df10001&clientIP=120.236.174.147&clientUA=eb24b7b8-2a4c-4cb5-995b-6cacd8714753">
+<meta property="og:image" content="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/GrLiv2.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDsNqQMX0YLQ0Knu6nItKmELnjTqwPKUrQ%26q-sign-time%3D1524309462%3B1524311262%26q-key-time%3D1524309462%3B1524311262%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D68a8396bcbd24d6fe06dcb852a93848588a628c1&token=af5b7879893e608ab5c26c771eb5149664553ee510001&clientIP=120.236.174.147&clientUA=a306f20d-f6f8-4f17-92b5-445995f7d51a">
+<meta property="og:image" content="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/GarageA.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDVTfU0uwBnHMm2gbf5sRn30DxromZSq6z%26q-sign-time%3D1524309489%3B1524311289%26q-key-time%3D1524309489%3B1524311289%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Dc3a444ca47de36ebd4d301d8a10e04639ca917a2&token=1048e0edb20e68ec11db96aaaf09be1feaddd86610001&clientIP=120.236.174.147&clientUA=01a6e258-37ef-4b6b-8b33-4695a2791c44">
+<meta property="og:image" content="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/TotalBs.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDvrcVxdudHrOHV9iYc7BXo18EMXj2PGFQ%26q-sign-time%3D1524309515%3B1524311315%26q-key-time%3D1524309515%3B1524311315%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Dac14b4ac00468f1195ba911af7ee2f184535bb8c&token=7237d130d07c578758984db5c046e5ccb0503d3410001&clientIP=120.236.174.147&clientUA=046a3b1e-ff45-4f33-8175-5bc828bd7507">
+<meta property="og:image" content="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/1F.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDqCXfgEpl7HZaxQfnPLvC7DA102Lejqt7%26q-sign-time%3D1524309531%3B1524311331%26q-key-time%3D1524309531%3B1524311331%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Df7cb5a2ea14044be7167b7fd16b8e567ba33f50b&token=6bb9bb8dd385e1d326be867c31be601bcccf6d4110001&clientIP=120.236.174.147&clientUA=26bd2a62-b6bb-4cc3-af34-12d7c6b2e418">
+<meta property="og:image" content="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/facetgrid.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKID9PHzZ3YqblF92DFbeM24bBefrBO0YK3i%26q-sign-time%3D1524309547%3B1524311347%26q-key-time%3D1524309547%3B1524311347%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Df1effb57a9cfcea9361287029e343f4d62568b3a&token=61d411fc2fd954d8ce69279ec0c4b525829ae26610001&clientIP=120.236.174.147&clientUA=468e9b9b-1b6a-4a4b-af11-f1d45db337ca">
+<meta property="og:updated_time" content="2018-04-21T11:19:27.257Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kaggle HousePrice 实战">
+<meta name="twitter:description" content="Kaggle HousePrice 实战题目网址：  https://www.kaggle.com/c/house-prices-advanced-regression-techniques  1.导入模块及读数据12345678910111213141516171819import pandas as pdimport numpy as npimport seaborn as snsimport">
+<meta name="twitter:image" content="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/SalePrice_distplot.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDTh4zBVcb33tORPWJoY1YGpxwU7ihPXmv%26q-sign-time%3D1524309393%3B1524311193%26q-key-time%3D1524309393%3B1524311193%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D084ea1fb0e31bc04a3658540233e7b58ae0e7b9f&token=831a6d9c80239904f076dc88f74f1c34bef0f22610001&clientIP=120.236.174.147&clientUA=463f6189-4aa1-4849-abf6-e6b3f15b65b2">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/18/2018-3-18/"/>
+
+
+
+
+
+  <title>Kaggle HousePrice 实战 | The Sands of Time</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">The Sands of Time</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">时之沙</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/18/2018-3-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The Sands of Time">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kaggle HousePrice 实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T22:05:30+08:00">
+                2018-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Kaggle-HousePrice-实战"><a href="#Kaggle-HousePrice-实战" class="headerlink" title="Kaggle HousePrice 实战"></a>Kaggle HousePrice 实战</h1><p>题目网址：</p>
+<blockquote>
+<p><a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques" target="_blank" rel="noopener">https://www.kaggle.com/c/house-prices-advanced-regression-techniques</a></p>
+</blockquote>
+<h2 id="1-导入模块及读数据"><a href="#1-导入模块及读数据" class="headerlink" title="1.导入模块及读数据"></a>1.导入模块及读数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> stats</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> skew</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> norm</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.manifold <span class="keyword">import</span> TSNE</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#read data</span></span><br><span class="line">train_df = pd.read_csv(<span class="string">"D:/python learning/House/train.csv"</span>)</span><br><span class="line">test_df = pd.read_csv(<span class="string">"D:/python learning/House/test.csv"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="2-数据探索"><a href="#2-数据探索" class="headerlink" title="2.数据探索"></a>2.数据探索</h2><h3 id="2-1-首先来看最关心的价格："><a href="#2-1-首先来看最关心的价格：" class="headerlink" title="2.1 首先来看最关心的价格："></a>2.1 首先来看最关心的价格：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_df[<span class="string">'SalePrice'</span>].describe()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">count      <span class="number">1460.000000</span></span><br><span class="line">mean     <span class="number">180921.195890</span></span><br><span class="line">std       <span class="number">79442.502883</span></span><br><span class="line">min       <span class="number">34900.000000</span></span><br><span class="line"><span class="number">25</span>%      <span class="number">129975.000000</span></span><br><span class="line"><span class="number">50</span>%      <span class="number">163000.000000</span></span><br><span class="line"><span class="number">75</span>%      <span class="number">214000.000000</span></span><br><span class="line">max      <span class="number">755000.000000</span></span><br><span class="line">Name: SalePrice, dtype: float64</span><br></pre></td></tr></table></figure>
+<ul>
+<li><h4 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h4></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.distplot(train_df[<span class="string">'SalePrice'</span>])</span><br></pre></td></tr></table></figure>
+<p><img src="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/SalePrice_distplot.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDTh4zBVcb33tORPWJoY1YGpxwU7ihPXmv%26q-sign-time%3D1524309393%3B1524311193%26q-key-time%3D1524309393%3B1524311193%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D084ea1fb0e31bc04a3658540233e7b58ae0e7b9f&amp;token=831a6d9c80239904f076dc88f74f1c34bef0f22610001&amp;clientIP=120.236.174.147&amp;clientUA=463f6189-4aa1-4849-abf6-e6b3f15b65b2" alt=""></p>
+<p>容易看出并不符合正态分布，直接查看峰度及偏度：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_df[<span class="string">'SalePrice'</span>].skew()</span><br><span class="line">train_df[<span class="string">'SalePrice'</span>].kurt()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.8828757597682129</span><br><span class="line">6.5362818600645287</span><br></pre></td></tr></table></figure>
+<p>skew()值为1.88，大于0.75，说明需要进行分布变换，后续在特征工程中使用log处理。</p>
+<h3 id="2-2-关联性分析"><a href="#2-2-关联性分析" class="headerlink" title="2.2 关联性分析"></a>2.2 关联性分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">corr=train_df.corr()</span><br><span class="line">sns.heatmap(corr)</span><br></pre></td></tr></table></figure>
+<p><img src="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/corrmap.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDoRr3RH46piCsNQb6LGtDlZX5ZuUReNys%26q-sign-time%3D1524309422%3B1524311222%26q-key-time%3D1524309422%3B1524311222%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D21e1b424a25614a5f00bf27408628c13678731ca&amp;token=54e2fc28975a601f6b4d82a05f2fd85a7d6ec0cf10001&amp;clientIP=120.236.174.147&amp;clientUA=64ecbfdc-b6fc-41f8-a02d-cff42014bd63" alt="corrmap"></p>
+<p>由于变量繁多 ，使用heatmap观察十分麻烦，还不如直接看相关性数值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">corr[<span class="string">'SalePrice'</span>].sort_values()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">KitchenAbvGr    <span class="number">-0.135907</span></span><br><span class="line">EnclosedPorch   <span class="number">-0.128578</span></span><br><span class="line">MSSubClass      <span class="number">-0.084284</span></span><br><span class="line">OverallCond     <span class="number">-0.077856</span></span><br><span class="line">YrSold          <span class="number">-0.028923</span></span><br><span class="line">LowQualFinSF    <span class="number">-0.025606</span></span><br><span class="line">Id              <span class="number">-0.021917</span></span><br><span class="line">MiscVal         <span class="number">-0.021190</span></span><br><span class="line">BsmtHalfBath    <span class="number">-0.016844</span></span><br><span class="line">BsmtFinSF2      <span class="number">-0.011378</span></span><br><span class="line"><span class="number">3</span>SsnPorch        <span class="number">0.044584</span></span><br><span class="line">MoSold           <span class="number">0.046432</span></span><br><span class="line">PoolArea         <span class="number">0.092404</span></span><br><span class="line">ScreenPorch      <span class="number">0.111447</span></span><br><span class="line">BedroomAbvGr     <span class="number">0.168213</span></span><br><span class="line">BsmtUnfSF        <span class="number">0.214479</span></span><br><span class="line">BsmtFullBath     <span class="number">0.227122</span></span><br><span class="line">LotArea          <span class="number">0.263843</span></span><br><span class="line">HalfBath         <span class="number">0.284108</span></span><br><span class="line">OpenPorchSF      <span class="number">0.315856</span></span><br><span class="line"><span class="number">2</span>ndFlrSF         <span class="number">0.319334</span></span><br><span class="line">WoodDeckSF       <span class="number">0.324413</span></span><br><span class="line">LotFrontage      <span class="number">0.351799</span></span><br><span class="line">BsmtFinSF1       <span class="number">0.386420</span></span><br><span class="line">Fireplaces       <span class="number">0.466929</span></span><br><span class="line">MasVnrArea       <span class="number">0.477493</span></span><br><span class="line">GarageYrBlt      <span class="number">0.486362</span></span><br><span class="line">YearRemodAdd     <span class="number">0.507101</span></span><br><span class="line">YearBuilt        <span class="number">0.522897</span></span><br><span class="line">TotRmsAbvGrd     <span class="number">0.533723</span></span><br><span class="line">FullBath         <span class="number">0.560664</span></span><br><span class="line"><span class="number">1</span>stFlrSF         <span class="number">0.605852</span></span><br><span class="line">TotalBsmtSF      <span class="number">0.613581</span></span><br><span class="line">GarageArea       <span class="number">0.623431</span></span><br><span class="line">GarageCars       <span class="number">0.640409</span></span><br><span class="line">GrLivArea        <span class="number">0.708624</span></span><br><span class="line">OverallQual      <span class="number">0.790982</span></span><br><span class="line">SalePrice        <span class="number">1.000000</span></span><br><span class="line">Name: SalePrice, dtype: float64</span><br></pre></td></tr></table></figure>
+<p>相关性的正负在这里并不十分重要，相当部分列与SalePrice的相关性小于0.2，属于弱相关，后续模型可以直接去除。</p>
+<p>所以记录下来，与数据处理一并进行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">KitchenAbvGr    <span class="number">-0.135907</span></span><br><span class="line">EnclosedPorch   <span class="number">-0.128578</span></span><br><span class="line">MSSubClass      <span class="number">-0.084284</span></span><br><span class="line">OverallCond     <span class="number">-0.077856</span></span><br><span class="line">YrSold          <span class="number">-0.028923</span></span><br><span class="line">LowQualFinSF    <span class="number">-0.025606</span></span><br><span class="line">Id              <span class="number">-0.021917</span></span><br><span class="line">MiscVal         <span class="number">-0.021190</span></span><br><span class="line">BsmtHalfBath    <span class="number">-0.016844</span></span><br><span class="line">BsmtFinSF2      <span class="number">-0.011378</span></span><br><span class="line"><span class="number">3</span>SsnPorch        <span class="number">0.044584</span></span><br><span class="line">MoSold           <span class="number">0.046432</span></span><br><span class="line">PoolArea         <span class="number">0.092404</span></span><br><span class="line">ScreenPorch      <span class="number">0.111447</span></span><br><span class="line">BedroomAbvGr     <span class="number">0.168213</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-3-异常值"><a href="#2-3-异常值" class="headerlink" title="2.3 异常值"></a>2.3 异常值</h3><p>查看相关性最强的几个属性是否存在异常点。发现则进行处理</p>
+<p>采用可视化</p>
+<h4 id="2-3-1-‘GrLivArea’"><a href="#2-3-1-‘GrLivArea’" class="headerlink" title="2.3.1 ‘GrLivArea’"></a>2.3.1 ‘GrLivArea’</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'GrLivArea'</span>,y=<span class="string">'SalePrice'</span>,data=train_df,fit_reg = <span class="keyword">False</span>,scatter=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/GrLiv.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKID8kqPwZPDC0IYa1wnN946V4q9E6zPeQbm%26q-sign-time%3D1524309442%3B1524311242%26q-key-time%3D1524309442%3B1524311242%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Dc655e268f56c29b52b9c5bc8cbafa044050c6325&amp;token=c356e977cb1cc71febcf20a59b80744e382c76df10001&amp;clientIP=120.236.174.147&amp;clientUA=eb24b7b8-2a4c-4cb5-995b-6cacd8714753" alt="GrLiv"></p>
+<p>右下角有两个异常点：房子面积很大，但是售价却很低</p>
+<p>寻找异常点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_df[<span class="string">'GrLivArea'</span>].sort_values()</span><br><span class="line"><span class="comment">#寻找异常点</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">533</span>      <span class="number">334</span></span><br><span class="line"><span class="number">1100</span>     <span class="number">438</span></span><br><span class="line"><span class="number">916</span>      <span class="number">480</span></span><br><span class="line"><span class="number">29</span>       <span class="number">520</span></span><br><span class="line"><span class="number">528</span>      <span class="number">605</span></span><br><span class="line"><span class="number">696</span>      <span class="number">616</span></span><br><span class="line"><span class="number">489</span>      <span class="number">630</span></span><br><span class="line"><span class="number">434</span>      <span class="number">630</span></span><br><span class="line"><span class="number">1449</span>     <span class="number">630</span></span><br><span class="line"><span class="number">614</span>      <span class="number">630</span></span><br><span class="line"><span class="number">1039</span>     <span class="number">630</span></span><br><span class="line"><span class="number">649</span>      <span class="number">630</span></span><br><span class="line"><span class="number">1212</span>     <span class="number">672</span></span><br><span class="line"><span class="number">402</span>      <span class="number">672</span></span><br><span class="line"><span class="number">1001</span>     <span class="number">691</span></span><br><span class="line"><span class="number">1337</span>     <span class="number">693</span></span><br><span class="line"><span class="number">438</span>      <span class="number">694</span></span><br><span class="line"><span class="number">1123</span>     <span class="number">698</span></span><br><span class="line"><span class="number">1323</span>     <span class="number">708</span></span><br><span class="line"><span class="number">1321</span>     <span class="number">720</span></span><br><span class="line"><span class="number">353</span>      <span class="number">720</span></span><br><span class="line"><span class="number">495</span>      <span class="number">720</span></span><br><span class="line"><span class="number">710</span>      <span class="number">729</span></span><br><span class="line"><span class="number">68</span>       <span class="number">747</span></span><br><span class="line"><span class="number">935</span>      <span class="number">747</span></span><br><span class="line"><span class="number">372</span>      <span class="number">752</span></span><br><span class="line"><span class="number">125</span>      <span class="number">754</span></span><br><span class="line"><span class="number">264</span>      <span class="number">764</span></span><br><span class="line"><span class="number">543</span>      <span class="number">767</span></span><br><span class="line"><span class="number">952</span>      <span class="number">768</span></span><br><span class="line"></span><br><span class="line"><span class="number">1386</span>    <span class="number">2784</span></span><br><span class="line"><span class="number">1328</span>    <span class="number">2792</span></span><br><span class="line"><span class="number">231</span>     <span class="number">2794</span></span><br><span class="line"><span class="number">1312</span>    <span class="number">2810</span></span><br><span class="line"><span class="number">803</span>     <span class="number">2822</span></span><br><span class="line"><span class="number">1142</span>    <span class="number">2828</span></span><br><span class="line"><span class="number">1046</span>    <span class="number">2868</span></span><br><span class="line"><span class="number">961</span>     <span class="number">2872</span></span><br><span class="line"><span class="number">1175</span>    <span class="number">2872</span></span><br><span class="line"><span class="number">1024</span>    <span class="number">2898</span></span><br><span class="line"><span class="number">58</span>      <span class="number">2945</span></span><br><span class="line"><span class="number">324</span>     <span class="number">2978</span></span><br><span class="line"><span class="number">1031</span>    <span class="number">3082</span></span><br><span class="line"><span class="number">1173</span>    <span class="number">3086</span></span><br><span class="line"><span class="number">197</span>     <span class="number">3112</span></span><br><span class="line"><span class="number">798</span>     <span class="number">3140</span></span><br><span class="line"><span class="number">608</span>     <span class="number">3194</span></span><br><span class="line"><span class="number">118</span>     <span class="number">3222</span></span><br><span class="line"><span class="number">496</span>     <span class="number">3228</span></span><br><span class="line"><span class="number">1353</span>    <span class="number">3238</span></span><br><span class="line"><span class="number">769</span>     <span class="number">3279</span></span><br><span class="line"><span class="number">635</span>     <span class="number">3395</span></span><br><span class="line"><span class="number">1268</span>    <span class="number">3447</span></span><br><span class="line"><span class="number">304</span>     <span class="number">3493</span></span><br><span class="line"><span class="number">185</span>     <span class="number">3608</span></span><br><span class="line"><span class="number">1169</span>    <span class="number">3627</span></span><br><span class="line"><span class="number">691</span>     <span class="number">4316</span></span><br><span class="line"><span class="number">1182</span>    <span class="number">4476</span></span><br><span class="line"><span class="number">523</span>     <span class="number">4676</span></span><br><span class="line"><span class="number">1298</span>    <span class="number">5642</span></span><br><span class="line">Name: GrLivArea, Length: <span class="number">1460</span>, dtype: int64</span><br></pre></td></tr></table></figure>
+<p>删除处理：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">train_df=train_df.drop(train_df[train_df[<span class="string">'GrLivArea'</span>]==<span class="number">5642</span>].index)</span><br><span class="line">train_df=train_df.drop(train_df[train_df[<span class="string">'GrLivArea'</span>]==<span class="number">4676</span>].index)</span><br><span class="line">sns.lmplot(x=<span class="string">'GrLivArea'</span>,y=<span class="string">'SalePrice'</span>,data=train_df,fit_reg = <span class="keyword">False</span>,scatter=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/GrLiv2.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDsNqQMX0YLQ0Knu6nItKmELnjTqwPKUrQ%26q-sign-time%3D1524309462%3B1524311262%26q-key-time%3D1524309462%3B1524311262%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D68a8396bcbd24d6fe06dcb852a93848588a628c1&amp;token=af5b7879893e608ab5c26c771eb5149664553ee510001&amp;clientIP=120.236.174.147&amp;clientUA=a306f20d-f6f8-4f17-92b5-445995f7d51a" alt="GrLiv2"></p>
+<p>其他相关属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.lmplot(x=<span class="string">'GarageArea'</span>,y=<span class="string">'SalePrice'</span>,data=train_df,fit_reg = <span class="keyword">False</span>,scatter=<span class="keyword">True</span>)  </span><br><span class="line">sns.lmplot(x=<span class="string">'TotalBsmtSF'</span>,y=<span class="string">'SalePrice'</span>,data=train_df,fit_reg = <span class="keyword">False</span>,scatter=<span class="keyword">True</span>)</span><br><span class="line">sns.lmplot(x=<span class="string">'1stFlrSF'</span>,y=<span class="string">'SalePrice'</span>,data=train_df,fit_reg = <span class="keyword">False</span>,scatter=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/GarageA.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDVTfU0uwBnHMm2gbf5sRn30DxromZSq6z%26q-sign-time%3D1524309489%3B1524311289%26q-key-time%3D1524309489%3B1524311289%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Dc3a444ca47de36ebd4d301d8a10e04639ca917a2&amp;token=1048e0edb20e68ec11db96aaaf09be1feaddd86610001&amp;clientIP=120.236.174.147&amp;clientUA=01a6e258-37ef-4b6b-8b33-4695a2791c44" alt="GarageA"></p>
+<p><img src="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/TotalBs.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDvrcVxdudHrOHV9iYc7BXo18EMXj2PGFQ%26q-sign-time%3D1524309515%3B1524311315%26q-key-time%3D1524309515%3B1524311315%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Dac14b4ac00468f1195ba911af7ee2f184535bb8c&amp;token=7237d130d07c578758984db5c046e5ccb0503d3410001&amp;clientIP=120.236.174.147&amp;clientUA=046a3b1e-ff45-4f33-8175-5bc828bd7507" alt="TotalBs"></p>
+<p><img src="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/1F.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDqCXfgEpl7HZaxQfnPLvC7DA102Lejqt7%26q-sign-time%3D1524309531%3B1524311331%26q-key-time%3D1524309531%3B1524311331%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Df7cb5a2ea14044be7167b7fd16b8e567ba33f50b&amp;token=6bb9bb8dd385e1d326be867c31be601bcccf6d4110001&amp;clientIP=120.236.174.147&amp;clientUA=26bd2a62-b6bb-4cc3-af34-12d7c6b2e418" alt="1F"></p>
+<p>没有突出的异常点</p>
+<h3 id="2-4-查看每个属性的分布"><a href="#2-4-查看每个属性的分布" class="headerlink" title="2.4 查看每个属性的分布"></a>2.4 查看每个属性的分布</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">quantitative = [col <span class="keyword">for</span> col <span class="keyword">in</span> train_df.columns <span class="keyword">if</span> train_df.dtypes[col] != <span class="string">'object'</span>]</span><br><span class="line">qualitative = [col <span class="keyword">for</span> col <span class="keyword">in</span> train_df.columns <span class="keyword">if</span> train_df.dtypes[col] == <span class="string">'object'</span>]</span><br><span class="line">f = pd.melt(train_df, value_vars=quantitative)</span><br><span class="line">g=sns.FacetGrid(f,col=<span class="string">"variable"</span>,col_wrap=<span class="number">3</span>,sharex=<span class="keyword">False</span>, sharey= <span class="keyword">False</span>)</span><br><span class="line">g=g.map(sns.distplot,<span class="string">'value'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://images-1256471135.cos.ap-guangzhou.myqcloud.com/House/facetgrid.png?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKID9PHzZ3YqblF92DFbeM24bBefrBO0YK3i%26q-sign-time%3D1524309547%3B1524311347%26q-key-time%3D1524309547%3B1524311347%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3Df1effb57a9cfcea9361287029e343f4d62568b3a&amp;token=61d411fc2fd954d8ce69279ec0c4b525829ae26610001&amp;clientIP=120.236.174.147&amp;clientUA=468e9b9b-1b6a-4a4b-af11-f1d45db337ca" alt="facetgrid"></p>
+<p>可以看出其中有些数据分布类似正态分布，可以使用log处理，相对提高与正态分布的相近性</p>
+<p>适合的属性有：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LotArea,BsmtUnfSF,<span class="number">1</span>stFlrSF,TotalBsmtSF,KitchenAbvGr <span class="comment">#记录下来在特征工程中处理</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-5-缺失值情况"><a href="#2-5-缺失值情况" class="headerlink" title="2.5 缺失值情况"></a>2.5 缺失值情况</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> col <span class="keyword">in</span> train_df.columns:</span><br><span class="line">    <span class="keyword">if</span> train_df[col].isnull().sum() &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">print</span> (col, train_df[col].isnull().sum())</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">LotFrontage <span class="number">259</span></span><br><span class="line">Alley <span class="number">1367</span></span><br><span class="line">MasVnrType <span class="number">8</span></span><br><span class="line">MasVnrArea <span class="number">8</span></span><br><span class="line">BsmtQual <span class="number">37</span></span><br><span class="line">BsmtCond <span class="number">37</span></span><br><span class="line">BsmtExposure <span class="number">38</span></span><br><span class="line">BsmtFinType1 <span class="number">37</span></span><br><span class="line">BsmtFinType2 <span class="number">38</span></span><br><span class="line">Electrical <span class="number">1</span></span><br><span class="line">FireplaceQu <span class="number">690</span></span><br><span class="line">GarageType <span class="number">81</span></span><br><span class="line">GarageYrBlt <span class="number">81</span></span><br><span class="line">GarageFinish <span class="number">81</span></span><br><span class="line">GarageQual <span class="number">81</span></span><br><span class="line">GarageCond <span class="number">81</span></span><br><span class="line">PoolQC <span class="number">1452</span></span><br><span class="line">Fence <span class="number">1177</span></span><br><span class="line">MiscFeature <span class="number">1404</span></span><br></pre></td></tr></table></figure>
+<p>数据总体为1459条记录 ，因此关于缺失值部分处理应遵循一下原则：</p>
+<p>1.缺失值过多，考虑删除整条属性</p>
+<p>2.缺失值比例不大，若是数值型考虑补充均值，若是字符串类型考虑用是否有缺失值作为新特征，或者填写出现次数最多的字符串</p>
+<h2 id="3-数据处理与特征工程"><a href="#3-数据处理与特征工程" class="headerlink" title="3. 数据处理与特征工程"></a>3. 数据处理与特征工程</h2><h3 id="3-1-弱相关属性处理"><a href="#3-1-弱相关属性处理" class="headerlink" title="3.1 弱相关属性处理"></a>3.1 弱相关属性处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">all_df=all_df.drop([<span class="string">'KitchenAbvGr'</span>, <span class="string">'EnclosedPorch'</span>, <span class="string">'MSSubClass'</span>, <span class="string">'OverallCond'</span>, <span class="string">'YrSold'</span>,\</span><br><span class="line">                        <span class="string">'LowQualFinSF'</span>, <span class="string">'Id'</span>, <span class="string">'MiscVal'</span>, <span class="string">'BsmtHalfBath'</span>, <span class="string">'BsmtFinSF2'</span>,<span class="string">'3SsnPorch'</span>,\</span><br><span class="line">                       <span class="string">'MoSold'</span>, <span class="string">'PoolArea'</span>, <span class="string">'ScreenPorch'</span>, <span class="string">'BedroomAbvGr'</span>],axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-处理缺失值"><a href="#3-2-处理缺失值" class="headerlink" title="3.2. 处理缺失值"></a>3.2. 处理缺失值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#缺失过多的 直接删除</span></span><br><span class="line">missing = all_df.isnull().sum()</span><br><span class="line">missing.sort_values(inplace =<span class="keyword">True</span>,ascending = <span class="keyword">False</span>)</span><br><span class="line">missing=missing[missing&gt;<span class="number">10</span>]</span><br><span class="line">all_df=all_df.drop(missing[missing&gt;<span class="number">10</span>].index,axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment">#缺失少的，用平均数填充</span></span><br><span class="line"><span class="keyword">for</span> col <span class="keyword">in</span> all_df.columns:</span><br><span class="line">    <span class="keyword">if</span> all_df[col].isnull().sum()&gt;<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> all_df[col].dtypes==<span class="string">'object'</span>:</span><br><span class="line">            val = all_df[col].dropna().value_counts().idxmax()</span><br><span class="line">            all_df[col]=all_df[col].fillna(val)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            val = all_df[col].dropna().mean()</span><br><span class="line">            all_df[col]= all_df[col].fillna(val)</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-处理Log项"><a href="#3-3-处理Log项" class="headerlink" title="3.3 处理Log项"></a>3.3 处理Log项</h3> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">logfeatures = [<span class="string">'GrLivArea'</span>,<span class="string">'1stFlrSF'</span>,<span class="string">'2ndFlrSF'</span>,<span class="string">'TotalBsmtSF'</span>,<span class="string">'LotArea'</span>,<span class="string">'KitchenAbvGr'</span>,<span class="string">'GarageArea'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> feature <span class="keyword">in</span> logfeatures:</span><br><span class="line">    train_df[feature]=np.log(train_df[feature].values)</span><br><span class="line">    test_df[feature]=np.log(test_df[feature].values)</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-处理定性变量"><a href="#3-4-处理定性变量" class="headerlink" title="3.4 处理定性变量"></a>3.4 处理定性变量</h3><p>直接使用get_dummies()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">quantitative = [f <span class="keyword">for</span> f <span class="keyword">in</span> all_df.columns <span class="keyword">if</span> all_df.dtypes[f] != <span class="string">'object'</span>]</span><br><span class="line">qualitative = [f <span class="keyword">for</span> f <span class="keyword">in</span> all_df.columns <span class="keyword">if</span> all_df.dtypes[f] == <span class="string">'object'</span>]</span><br><span class="line"></span><br><span class="line">tmp = pd.get_dummies(all_df[qualitative])</span><br><span class="line">all_df = all_df.join(tmp)</span><br><span class="line">all_df = all_df.drop(qualitative, axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-数值变量标准化"><a href="#3-5-数值变量标准化" class="headerlink" title="3.5 数值变量标准化"></a>3.5 数值变量标准化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ss = StandardScaler()</span><br><span class="line">X = all_df[quantitative]</span><br><span class="line">s= ss.fit_transform(X)</span><br><span class="line">all_df[quantitative] = s</span><br></pre></td></tr></table></figure>
+<h2 id="4-模型"><a href="#4-模型" class="headerlink" title="4 .模型"></a>4 .模型</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#分割训练集和测试集</span></span><br><span class="line">train = all_df.loc[train_df.index]</span><br><span class="line">test = all_df.loc[test_df.index]    </span><br><span class="line">y=np.log(y)</span><br></pre></td></tr></table></figure>
+<p>暂时选用lasso</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> Lasso,LassoCV</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rmse_cv</span><span class="params">(model)</span>:</span></span><br><span class="line">    rmse= np.sqrt(-cross_val_score(model, train, y, scoring=<span class="string">"neg_mean_squared_error"</span>, cv = <span class="number">5</span>))</span><br><span class="line">    <span class="keyword">return</span>(rmse)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">alphas = np.logspace(<span class="number">-4</span>, <span class="number">-2</span>, <span class="number">100</span>)</span><br><span class="line">cv_lasso = []</span><br><span class="line">coefs = []</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> alphas:</span><br><span class="line">    model = Lasso(alpha = a,max_iter=<span class="number">5000</span>)</span><br><span class="line">    model.fit(train,y)</span><br><span class="line">    cv_lasso.append(rmse_cv(model).mean())</span><br><span class="line">    coefs.append(model.coef_)</span><br><span class="line"></span><br><span class="line">cv_lasso = pd.Series(cv_lasso, index = alphas)</span><br><span class="line">cv_lasso.plot(title = <span class="string">"Validation - Just Do It"</span>)</span><br><span class="line">plt.xlabel(<span class="string">"alpha"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"rmse"</span>)</span><br></pre></td></tr></table></figure>
+<p>预测结果,提交</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">model = Lasso(alpha = 0.0031,max_iter=5000)</span><br><span class="line">model.fit(train,y)</span><br><span class="line"></span><br><span class="line">result = model.predict(test)</span><br><span class="line">final = np.exp(result)</span><br><span class="line">submission = pd.DataFrame()</span><br><span class="line">submission[&apos;Id&apos;] = test_df.Id</span><br><span class="line">submission[&apos;SalePrice&apos;] = final</span><br><span class="line">submission.to_csv(&quot;HousePrice_submission_4.csv&quot;,index = False)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/12/2018-3-12/" rel="next" title="leetcode 初体验">
+                <i class="fa fa-chevron-left"></i> leetcode 初体验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/23/2018-03-23/" rel="prev" title="Kaggle Digit Recognizer 总结">
+                Kaggle Digit Recognizer 总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/CropTmpFile-1477116557107.jpg"
+                alt="Leon" />
+            
+              <p class="site-author-name" itemprop="name">Leon</p>
+              <p class="site-description motion-element" itemprop="description">你是不是缺心眼儿</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/#/user/home?id=99959008" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-globe"></i>网易云音乐</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.bilibili.com/video/av6211226/" target="_blank" title="尼古拉·特斯拉：发明了现代世界的人">
+                      
+                        <i class="fa fa-fw fa-globe"></i>尼古拉·特斯拉：发明了现代世界的人</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                神奇的链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.uisdc.com/" title="优设" target="_blank">优设</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.zhangxinxu.com/" title="张鑫旭" target="_blank">张鑫旭</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cn.soulmachine.me/" title="灵魂机器" target="_blank">灵魂机器</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kaggle-HousePrice-实战"><span class="nav-number">1.</span> <span class="nav-text">Kaggle HousePrice 实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-导入模块及读数据"><span class="nav-number">1.1.</span> <span class="nav-text">1.导入模块及读数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数据探索"><span class="nav-number">1.2.</span> <span class="nav-text">2.数据探索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-首先来看最关心的价格："><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 首先来看最关心的价格：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可视化"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">可视化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-关联性分析"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 关联性分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-异常值"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 异常值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-‘GrLivArea’"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">2.3.1 ‘GrLivArea’</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-查看每个属性的分布"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 查看每个属性的分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-缺失值情况"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 缺失值情况</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-数据处理与特征工程"><span class="nav-number">1.3.</span> <span class="nav-text">3. 数据处理与特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-弱相关属性处理"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 弱相关属性处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-处理缺失值"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2. 处理缺失值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-处理Log项"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 处理Log项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-处理定性变量"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 处理定性变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-数值变量标准化"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 数值变量标准化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-模型"><span class="nav-number">1.4.</span> <span class="nav-text">4 .模型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leon</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a>
+<span>   |   </span>
+<span id="showDays"></span>
+</div>
+
+
+
+
+<script>
+  var seconds = 1000;
+  var minutes = seconds * 60;
+  var hours = minutes * 60;
+  var days = hours * 24;
+  var years = days * 365;
+  var birthDay = Date.UTC(2016,05,16,00,00,00); // 这里设置建站时间
+  setInterval(function() {
+    var today = new Date();
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth()+1;
+    var todayDate = today.getDate();
+    var todayHour = today.getHours();
+    var todayMinute = today.getMinutes();
+    var todaySecond = today.getSeconds();
+    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+    var diff = now - birthDay;
+    var diffYears = Math.floor(diff/years);
+    var diffDays = Math.floor((diff/days)-diffYears*365);
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+      document.getElementById('showDays').innerHTML="本站已运行 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+  }, 1000);
+</script>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

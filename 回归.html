@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#fff">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml" />
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="笔记1：对回归方法的认识  问题引入  假设有一个房屋销售的数据如下：    面积(m\^2) 销售价钱（万元）     123 250   150 320   87 160   102 220   … …    这个表类似于北京 5 环左右的房屋价钱，我们可以做出一个图，x 轴是房屋的面积。y轴是房屋的售价，如下：  如果来了一个新的面积，假设在销售价钱的记录中没有的，我们怎么办呢？我们可以用一">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2016-3-12">
+<meta property="og:url" content="http://yoursite.com/回归.html">
+<meta property="og:site_name" content="The Sands of Time">
+<meta property="og:description" content="笔记1：对回归方法的认识  问题引入  假设有一个房屋销售的数据如下：    面积(m\^2) 销售价钱（万元）     123 250   150 320   87 160   102 220   … …    这个表类似于北京 5 环左右的房屋价钱，我们可以做出一个图，x 轴是房屋的面积。y轴是房屋的售价，如下：  如果来了一个新的面积，假设在销售价钱的记录中没有的，我们怎么办呢？我们可以用一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/media/a4abc2416bcc0a892a35eed9bc3c60fb.jpg">
+<meta property="og:image" content="http://yoursite.com/media/11e145dbcd3f4d85b095d2abfca323fa.jpg">
+<meta property="og:image" content="http://yoursite.com/media/dcbaa142130362e2aa9a248d4f8d72f4.png">
+<meta property="og:image" content="http://yoursite.com/media/11249846a2dc59d921dae67b3cdbc6a3.png">
+<meta property="og:image" content="http://yoursite.com/media/55e0a90e1ea128cbcd4905db8f58ef17.jpg">
+<meta property="og:image" content="http://yoursite.com/media/5ea34adc04365c948cdfab6b000ec79b.jpg">
+<meta property="og:image" content="http://yoursite.com/media/41a399e54ac212912abf642aff37f76f.png">
+<meta property="og:image" content="http://yoursite.com/media/f60d6186c95975cfe6231d1edb454995.jpg">
+<meta property="og:image" content="http://yoursite.com/media/c26f24e68a1c80bde780def185ed6fba.png">
+<meta property="og:image" content="http://yoursite.com/media/f58cea06494ac92e1e3411616436c5ab.jpg">
+<meta property="og:image" content="http://yoursite.com/media/4965483e72a5dabc2f9f7c301e4dbc14.png">
+<meta property="og:image" content="http://yoursite.com/media/a9a50e337a3a220d826f90393546c3b9.jpg">
+<meta property="og:image" content="http://yoursite.com/media/23da89d4603e6976dc2911c2cb25c457.png">
+<meta property="og:image" content="http://yoursite.com/media/a7ebc811353f50fba2957befbaa57f16.png">
+<meta property="og:image" content="http://yoursite.com/media/6076bb6a31ea4a37bd7444f123f0fdfd.png">
+<meta property="og:image" content="http://yoursite.com/media/770ecf26bfe7635bff8689ed82056086.png">
+<meta property="og:image" content="http://yoursite.com/media/544e5cc7bfb133e126e809a9138ddcb7.jpg">
+<meta property="og:image" content="http://yoursite.com/media/67508553278da7ff1b28b135046ba036.png">
+<meta property="og:image" content="http://yoursite.com/media/dc3fc1612b06060c899e620efdb56e52.jpg">
+<meta property="og:image" content="http://yoursite.com/media/ce0f4ce18b729f05403e921a58e9472d.png">
+<meta property="og:image" content="http://yoursite.com/media/8833b4b6e99b47a48cbee8e7b5eae5b7.png">
+<meta property="og:image" content="http://yoursite.com/media/82f6800212995145d0945cf828772b7e.png">
+<meta property="og:image" content="http://yoursite.com/media/f43365e4b5631d2d28e6afc52f7362be.png">
+<meta property="og:image" content="http://yoursite.com/media/f43365e4b5631d2d28e6afc52f7362be.png">
+<meta property="og:image" content="http://yoursite.com/media/7efe107e1c1cceee8168e54b46793db2.png">
+<meta property="og:image" content="http://yoursite.com/media/833c743120d0a35aca8b438392def838.png">
+<meta property="og:image" content="http://yoursite.com/media/3569d368d7c86ef5c60482d164c45d7f.png">
+<meta property="og:image" content="http://yoursite.com/media/7ee917db0b7ac6ce73b1dfb2cfa157a3.png">
+<meta property="og:image" content="http://yoursite.com/media/fd1a87d31294cded7974621ffd6dbd81.png">
+<meta property="og:image" content="http://yoursite.com/media/f735395f5ae625db11ca13c993756051.jpg">
+<meta property="og:image" content="http://yoursite.com/media/b365823a05e0caec7acb51ad973a6139.jpg">
+<meta property="og:image" content="http://yoursite.com/media/b336fca047b19ecfbd331e573de5b1c7.jpg">
+<meta property="og:image" content="http://yoursite.com/media/122b82ef274054dc53c6e3dbd4731edc.jpg">
+<meta property="og:image" content="http://yoursite.com/media/50124e517084e7c2acd592d814b19ea2.jpg">
+<meta property="og:image" content="http://yoursite.com/media/403bfbbe71ecadea972bff46822bb4dd.jpg">
+<meta property="og:image" content="http://yoursite.com/media/403bfbbe71ecadea972bff46822bb4dd.jpg">
+<meta property="og:image" content="http://yoursite.com/media/ffde96e4446d6a4e95f40f42dcd668bf.png">
+<meta property="og:image" content="http://yoursite.com/media/d5b7b4451b181ab15197c9befa316b03.png">
+<meta property="og:updated_time" content="2018-04-16T15:10:05.082Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2016-3-12">
+<meta name="twitter:description" content="笔记1：对回归方法的认识  问题引入  假设有一个房屋销售的数据如下：    面积(m\^2) 销售价钱（万元）     123 250   150 320   87 160   102 220   … …    这个表类似于北京 5 环左右的房屋价钱，我们可以做出一个图，x 轴是房屋的面积。y轴是房屋的售价，如下：  如果来了一个新的面积，假设在销售价钱的记录中没有的，我们怎么办呢？我们可以用一">
+<meta name="twitter:image" content="http://yoursite.com/media/a4abc2416bcc0a892a35eed9bc3c60fb.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/回归.html"/>
+
+
+
+
+
+  <title>2016-3-12 | The Sands of Time</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">The Sands of Time</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">时之沙</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">2016-3-12</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <p>笔记1：对回归方法的认识</p>
+<ol>
+<li>问题引入</li>
+</ol>
+<p>假设有一个房屋销售的数据如下：</p>
+<table>
+<thead>
+<tr>
+<th>面积(m\^2)</th>
+<th>销售价钱（万元）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>123</td>
+<td>250</td>
+</tr>
+<tr>
+<td>150</td>
+<td>320</td>
+</tr>
+<tr>
+<td>87</td>
+<td>160</td>
+</tr>
+<tr>
+<td>102</td>
+<td>220</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>这个表类似于北京 5 环左右的房屋价钱，我们可以做出一个图，x 轴是房屋的面积。y<br>轴是房屋的售价，如下：</p>
+<p><img src="media/a4abc2416bcc0a892a35eed9bc3c60fb.jpg" alt=""></p>
+<p>如果来了一个新的面积，假设在销售价钱的记录中没有的，我们怎么办呢？<br>我们可以用一条曲线去尽量准的拟合这些数据，然后如果有新的输入过来，我们可以在将曲线上这个点对应的值返回。如果用一条直线去拟合，可能是下面这：</p>
+<p><img src="media/11e145dbcd3f4d85b095d2abfca323fa.jpg" alt=""></p>
+<p>绿色的点就是我们想要预测的点。</p>
+<p>首先给出一些概念和常用的符号。</p>
+<p>房屋销售记录表：训练集(training set)或者训练数据(training data),<br>是我们流程中的输入数据，一般称为 x</p>
+<p>房屋销售价钱：输出数据，一般称为 y 拟合的函数（或者称为假设或者模型）：一般写做<br>y = h(x)</p>
+<p>训练数据的条目数<strong>(#training<br>set),</strong>：一条训练数据是由一对输入数据和输出数据组成的输入数据的维度 n<br>(特征的个数，#features)</p>
+<p>这个例子的特征是两维的，结果是一维的。然而回归方法能够解决特征多维，结果是一维多离散值或一维连续值的问题。</p>
+<ol>
+<li>学习过程</li>
+</ol>
+<p>下面是一个典型的机器学习的过程，首先给出一个输入数据，我们的算法会通过一系列的过程得到一个估计的函数，这个函数有能力对没有见过的新数据给出一个新的估计，也被称为构建一个模型。就如同上面的线性回归函数。</p>
+<p><img src="media/dcbaa142130362e2aa9a248d4f8d72f4.png" alt=""></p>
+<h1 id="线性回归"><a href="#线性回归" class="headerlink" title=" 线性回归 "></a> 线性回归 </h1><p>线性回归假设特征和结果满足线性关系。其实线性关系的表达能力非常强大，每个特征对结果的影响强弱可以有前面的参数体现，而且每个特征变量可以首先映射到一个函数，然后再参与线性计算。这样就可以表达特征与结果之间的非线性关系。</p>
+<p>我们用 X1，X2..Xn 去描述 feature 里面的分量，比如<br>x1=房间的面积，x2=房间的朝向，等等，我们可以做出一个估计函数：</p>
+<p>$$<br>h\left( x \right) = h_{0}\left( x \right) = \theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2}\<br>$$</p>
+<p>θ 在这儿称为参数，在这的意思是调整 feature<br>中每个分量的影响力，就是到底是房屋的面积更重要还是房屋的地段更重要。为了如果我们令<br>X0 = 1，就可以用向量的方式来表示了：</p>
+<p>$$<br>h_{0}\left( x \right) = \theta^{T}X<br>$$</p>
+<p>我们程序也需要一个机制去评估我们 θ 是否比较好，所以说需要对我们做出的 h<br>函数进行评估，一般这个函数称为损失函数（loss function）或者错误函数(error<br>function)，描述 h 函数不好的程度，在下面，我们称这个函数为 J 函数<br>在这儿我们可以做出下面的一个错误函数：</p>
+<p>$$J(\theta) = \frac{1}{2}\ \sum_{i = 1}^{m}{(h_{0}(x))}$$</p>
+<p><img src="media/11249846a2dc59d921dae67b3cdbc6a3.png" alt=""></p>
+<p>这个错误估计函数是去对 x(i)的估计值与真实值<br>y(i)差的平方和作为错误估计函数，前面乘上的 1/2<br>是为了在求导的时候，这个系数就不见了。<br>至于为何选择平方和作为错误估计函数，讲义后面从概率分布的角度讲解了该公式的来源。</p>
+<p>如何调整 θ 以使得 J(θ)取得最小值有很多方法，其中有最小二乘法(min<br>square)，是一种完全是数学描述的方法，和梯度下降法。</p>
+<h1 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title=" 梯度下降法 "></a> 梯度下降法 </h1><p>在选定线性回归模型后，只需要确定参数 θ，就可以将模型用来预测。然而 θ 需要在 J(θ)<br>最小的情况下才能确定。因此问题归结为求极小值问题，使用梯度下降法。梯度下降法最大的问题是求得有可能是全局极小值，这与初始点的选取有关。</p>
+<p>梯度下降法是按下面的流程进行的：</p>
+<p>1）首先对 θ 赋值，这个值可以是随机的，也可以让 θ 是一个全零的向量。</p>
+<p>2）改变 θ 的值，使得 J(θ)按梯度下降的方向进行减少。</p>
+<p>梯度方向由 J(θ)对 θ<br>的偏导数确定，由于求的是极小值，因此梯度方向是偏导数的反方向。结果为</p>
+<p><img src="media/55e0a90e1ea128cbcd4905db8f58ef17.jpg" alt=""></p>
+<p>迭代更新的方式有两种，一种是批梯度下降，也就是对全部的训练数据求得误差后再对 θ<br>进行更新，另外一种是增量梯度下降，每扫描一步都要对 θ<br>进行更新。前一种方法能够不断收敛，后一种方法结果可能不断在收敛处徘徊。</p>
+<p>一般来说，梯度下降法收敛速度还是比较慢的。</p>
+<p>另一种直接计算结果的方法是最小二乘法。</p>
+<h1 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法 "></a>最小二乘法 </h1><p>将训练特征表示为 X 矩阵，结果表示成 y<br>向量，仍然是线性回归模型，误差函数不变。那么 θ 可以直接由下面公式得出</p>
+<p><img src="media/5ea34adc04365c948cdfab6b000ec79b.jpg" alt=""></p>
+<p>但此方法要求 X 是列满秩的，而且求矩阵的逆比较慢。</p>
+<h1 id="选用误差函数为平方和的概率解释"><a href="#选用误差函数为平方和的概率解释" class="headerlink" title="选用误差函数为平方和的概率解释 "></a>选用误差函数为平方和的概率解释 </h1><p>假设根据特征的预测结果与实际结果有误差∈(𝑖)，那么预测结果𝜃𝑇𝑥(i)和真实结果𝑦(𝑖)满足下式：</p>
+<p><img src="media/41a399e54ac212912abf642aff37f76f.png" alt=""></p>
+<p>一般来讲，误差满足平均值为 0 的高斯分布，也就是正态分布。那么 x 和 y<br>的条件概率也就</p>
+<p>是</p>
+<p><img src="media/f60d6186c95975cfe6231d1edb454995.jpg" alt=""></p>
+<p>这样就估计了一条样本的结果概率，然而我们期待的是模型能够在全部样本上预测最准，也就是概率积最大。这个概率积成为最大似然估计。我们希望在最大似然估计得到最大值时确定<br>θ。那么需要对最大似然估计公式求导，求导结果既是</p>
+<p><img src="media/c26f24e68a1c80bde780def185ed6fba.png" alt=""></p>
+<p>这就解释了为何误差函数要使用平方和。<br>当然推导过程中也做了一些假定，但这个假定符合客观规律。</p>
+<h1 id="带权重的线性回归"><a href="#带权重的线性回归" class="headerlink" title="带权重的线性回归 "></a>带权重的线性回归 </h1><p>上面提到的线性回归的误差函数里系统都是<br>1，没有权重。带权重的线性回归加入了权重信息。</p>
+<p>其中 x 是要预测的特征，这样假设的道理是离 x<br>越近的样本权重越大，越远的影响越小。这个公式与高斯分布类似，但不一样，因为w(i)不是随机变量。</p>
+<p>基本假设是:</p>
+<p><img src="media/f58cea06494ac92e1e3411616436c5ab.jpg" alt=""></p>
+<p>其中假设$$\omega^{(i)}$$符合公式:</p>
+<p><img src="media/4965483e72a5dabc2f9f7c301e4dbc14.png" alt=""></p>
+<p>此方法成为非参数学习算法，因为误差函数随着预测值的不同而不同，这样 θ<br>无法事先确定，预测一次需要临时计算，感觉类似 KNN。</p>
+<h1 id="分类和对数回归"><a href="#分类和对数回归" class="headerlink" title="分类和对数回归 "></a>分类和对数回归 </h1><blockquote>
+<p>  一般来说，回归不用在分类问题上，因为回归是连续型模型，而且受噪声影响比较大。</p>
+</blockquote>
+<p>如果非要应用进入，可以使用对数回归。</p>
+<p>对数回归本质上是线性回归，只是在特征到结果的映射中加入了一层函数映射，即先把特征线性求和，然后使用函数<br>g(z)将最为假设函数来预测。g(z)可以将连续值映射到 0 和 1 上。</p>
+<blockquote>
+<p>  对数回归的假设函数如下，线性回归假设函数只是𝜃𝑇𝑥。</p>
+</blockquote>
+<p><img src="media/a9a50e337a3a220d826f90393546c3b9.jpg" alt=""></p>
+<p>对数回归用来分类 0/1 问题，也就是预测结果属于 0 或者 1<br>的二值分类问题。这里假设了二值满足伯努利分布，也就是</p>
+<p><img src="media/23da89d4603e6976dc2911c2cb25c457.png" alt=""></p>
+<blockquote>
+<p>  当然假设它满足泊松分布、指数分布等等也可以，只是比较复杂，后面会提到线性回归</p>
+</blockquote>
+<p>的一般形式。</p>
+<blockquote>
+<p>  与第 7 节一样，仍然求的是最大似然估计，然后求导，得到迭代公式结果为</p>
+</blockquote>
+<p><img src="media/a7ebc811353f50fba2957befbaa57f16.png" alt=""></p>
+<blockquote>
+<p>  可以看到与线性回归类似，只是𝜃𝑇𝑥(i)换成了ℎ𝜃(𝑥(𝑖))，而ℎ𝜃(𝑥(𝑖))实际上就是𝜃𝑇𝑥(i)经过</p>
+</blockquote>
+<p>g(z)映射过来的。</p>
+<h1 id="牛顿法来解最大似然估计"><a href="#牛顿法来解最大似然估计" class="headerlink" title="牛顿法来解最大似然估计 "></a>牛顿法来解最大似然估计 </h1><blockquote>
+<p>  第 7 和第 9<br>  节使用的解最大似然估计的方法都是求导迭代的方法，这里介绍了牛顿下降</p>
+</blockquote>
+<p>法，使结果能够快速的收敛。 当要求解f(θ) = 0时，如果 f 可导，那么可以通过迭代公式</p>
+<p><img src="media/6076bb6a31ea4a37bd7444f123f0fdfd.png" alt=""></p>
+<blockquote>
+<p>  来迭代求解最小值。</p>
+</blockquote>
+<blockquote>
+<p>  当应用于求解最大似然估计的最大值时，变成求解ℓ′(𝜃) = 0的问题。</p>
+</blockquote>
+<blockquote>
+<p>  当θ是向量时，牛顿法可以使用下面式子表示</p>
+</blockquote>
+<p><img src="media/770ecf26bfe7635bff8689ed82056086.png" alt=""></p>
+<p><img src="media/544e5cc7bfb133e126e809a9138ddcb7.jpg" alt=""></p>
+<p>牛顿法收敛速度虽然很快，但求 Hessian 矩阵的逆的时候比较耗费时间。 当初始点 X0<br>靠近极小值 X 时，牛顿法的收敛速度是最快的。但是当 X0<br>远离极小值时，牛顿法可能不收敛，甚至连下降都保证不了。原因是迭代点 Xk+1<br>不一定是目标函数 f 在牛顿方向上的极小点。</p>
+<h1 id="一般线性模型"><a href="#一般线性模型" class="headerlink" title="一般线性模型 "></a>一般线性模型 </h1><blockquote>
+<p>  之所以在对数回归时使用</p>
+</blockquote>
+<p><img src="media/67508553278da7ff1b28b135046ba036.png" alt=""></p>
+<blockquote>
+<p>  的公式是由一套理论作支持的。 这个理论便是一般线性模型。<br>  首先，如果一个概率分布可以表示成</p>
+</blockquote>
+<p><img src="media/dc3fc1612b06060c899e620efdb56e52.jpg" alt=""></p>
+<blockquote>
+<p>  时，那么这个概率分布可以称作是指数分布。<br>  伯努利分布，高斯分布，泊松分布，贝塔分布，狄特里特分布都属于指数分布。</p>
+</blockquote>
+<p>在对数回归时采用的是伯努利分布，伯努利分布的概率可以表示成</p>
+<p><img src="media/ce0f4ce18b729f05403e921a58e9472d.png" alt=""></p>
+<blockquote>
+<p>  其中</p>
+</blockquote>
+<p><img src="media/8833b4b6e99b47a48cbee8e7b5eae5b7.png" alt=""></p>
+<blockquote>
+<p>  得到</p>
+</blockquote>
+<p><img src="media/82f6800212995145d0945cf828772b7e.png" alt=""></p>
+<blockquote>
+<p>  这就解释了对数回归时为了要用这个函数。</p>
+</blockquote>
+<blockquote>
+<p>  一般线性模型的要点是 $$y|x$$; θ 满足一个以</p>
+</blockquote>
+<p><img src="media/f43365e4b5631d2d28e6afc52f7362be.png" alt=""></p>
+<blockquote>
+<p>  为参数的指数分布，那么可以求得</p>
+</blockquote>
+<p><img src="media/f43365e4b5631d2d28e6afc52f7362be.png" alt=""></p>
+<blockquote>
+<p>  的表达式。</p>
+</blockquote>
+<p><img src="media/7efe107e1c1cceee8168e54b46793db2.png" alt=""></p>
+<blockquote>
+<p>  ） 给定 x，我们的目标是要确定T(y)，大多数情况下T(y) =<br>  y，那么我们实际上要确定的是h(x)，而h(x) = E[y|x]。（在对数回归中期望值是</p>
+</blockquote>
+<p><img src="media/833c743120d0a35aca8b438392def838.png" alt=""></p>
+<blockquote>
+<p>  ，因此 h 是</p>
+</blockquote>
+<p><img src="media/3569d368d7c86ef5c60482d164c45d7f.png" alt=""></p>
+<blockquote>
+<p>  ；在线性回归中期望值是</p>
+</blockquote>
+<p><img src="media/7ee917db0b7ac6ce73b1dfb2cfa157a3.png" alt=""></p>
+<blockquote>
+<p>  ，而高斯分布中η = μ，因此线性回归中 h=𝜃𝑇𝑥）。</p>
+</blockquote>
+<p><img src="media/fd1a87d31294cded7974621ffd6dbd81.png" alt=""></p>
+<blockquote>
+<p>  ）$$\  = \ \theta Tx\$$</p>
+</blockquote>
+<p><strong>11.Softmax</strong> 回归</p>
+<blockquote>
+<p>  最后举了一个利用一般线性模型的例子。 假设预测值 y 有 k 种可能，即<br>  y∈{1,2,…,k}</p>
+</blockquote>
+<blockquote>
+<p>  比如 k=3<br>  时，可以看作是要将一封未知邮件分为垃圾邮件、个人邮件还是工作邮件这三类。</p>
+</blockquote>
+<p><img src="media/f735395f5ae625db11ca13c993756051.jpg" alt=""></p>
+<blockquote>
+<p>  即式子左边可以有其他的概率表示，因此可以当做是 k-1 维的问题。</p>
+</blockquote>
+<p><img src="media/b365823a05e0caec7acb51ad973a6139.jpg" alt=""></p>
+<blockquote>
+<p>  T(y)这时候一组 k-1 维的向量，不再是 y。即 T(y)要给出 y=i（i 从 1 到<br>  k-1）的概率 。</p>
+</blockquote>
+<blockquote>
+<p>  应用与一般线性模型：</p>
+</blockquote>
+<p><img src="media/b336fca047b19ecfbd331e573de5b1c7.jpg" alt=""></p>
+<blockquote>
+<p>  那么：</p>
+</blockquote>
+<p><img src="media/122b82ef274054dc53c6e3dbd4731edc.jpg" alt=""></p>
+<blockquote>
+<p>  最后得：</p>
+</blockquote>
+<p><img src="media/50124e517084e7c2acd592d814b19ea2.jpg" alt=""></p>
+<blockquote>
+<p>  而$$y = i$$ 时：</p>
+</blockquote>
+<p><img src="media/403bfbbe71ecadea972bff46822bb4dd.jpg" alt=""></p>
+<blockquote>
+<p>  求得期望值：</p>
+</blockquote>
+<p><img src="media/403bfbbe71ecadea972bff46822bb4dd.jpg" alt=""></p>
+<p><img src="media/ffde96e4446d6a4e95f40f42dcd668bf.png" alt=""></p>
+<blockquote>
+<p>  那么就建立了假设函数，最后就获得了最大似然估计 ：</p>
+</blockquote>
+<p><img src="media/d5b7b4451b181ab15197c9befa316b03.png" alt=""></p>
+<blockquote>
+<p>  对该公式可以使用梯度下降或者牛顿法迭代求解。 解决了多值模型建立与预测问题。</p>
+</blockquote>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/CropTmpFile-1477116557107.jpg"
+                alt="Leon" />
+            
+              <p class="site-author-name" itemprop="name">Leon</p>
+              <p class="site-description motion-element" itemprop="description">你是不是缺心眼儿</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://music.163.com/#/user/home?id=99959008" target="_blank" title="网易云音乐">
+                      
+                        <i class="fa fa-fw fa-globe"></i>网易云音乐</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.bilibili.com/video/av6211226/" target="_blank" title="尼古拉·特斯拉：发明了现代世界的人">
+                      
+                        <i class="fa fa-fw fa-globe"></i>尼古拉·特斯拉：发明了现代世界的人</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                神奇的链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.uisdc.com/" title="优设" target="_blank">优设</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.zhangxinxu.com/" title="张鑫旭" target="_blank">张鑫旭</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cn.soulmachine.me/" title="灵魂机器" target="_blank">灵魂机器</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线性回归"><span class="nav-number">1.</span> <span class="nav-text"> 线性回归 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降法"><span class="nav-number">2.</span> <span class="nav-text"> 梯度下降法 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最小二乘法"><span class="nav-number">3.</span> <span class="nav-text">最小二乘法 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#选用误差函数为平方和的概率解释"><span class="nav-number">4.</span> <span class="nav-text">选用误差函数为平方和的概率解释 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#带权重的线性回归"><span class="nav-number">5.</span> <span class="nav-text">带权重的线性回归 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分类和对数回归"><span class="nav-number">6.</span> <span class="nav-text">分类和对数回归 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#牛顿法来解最大似然估计"><span class="nav-number">7.</span> <span class="nav-text">牛顿法来解最大似然估计 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一般线性模型"><span class="nav-number">8.</span> <span class="nav-text">一般线性模型 </span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leon</span>
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a>
+<span>   |   </span>
+<span id="showDays"></span>
+</div>
+
+
+
+
+<script>
+  var seconds = 1000;
+  var minutes = seconds * 60;
+  var hours = minutes * 60;
+  var days = hours * 24;
+  var years = days * 365;
+  var birthDay = Date.UTC(2016,05,16,00,00,00); // 这里设置建站时间
+  setInterval(function() {
+    var today = new Date();
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth()+1;
+    var todayDate = today.getDate();
+    var todayHour = today.getHours();
+    var todayMinute = today.getMinutes();
+    var todaySecond = today.getSeconds();
+    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+    var diff = now - birthDay;
+    var diffYears = Math.floor(diff/years);
+    var diffDays = Math.floor((diff/days)-diffYears*365);
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+      document.getElementById('showDays').innerHTML="本站已运行 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+  }, 1000);
+</script>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

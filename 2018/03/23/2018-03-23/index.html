@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -117,17 +117,17 @@
 
 
 
-<meta name="description" content="#Digit Recognizer 作为本人入门机器学习所做的第二个项目，并没有很难（毕竟是入门级），但却给了我很宝贵的实际操作经验，不仅认识了 KNN , LR ,SVM等三个算法的优缺点，亦学习到一种降维手段PCA。代码后面有空补上 ###1.KNN 第一次见到这个题目，就是在《机器学习实战》的第二章所描述的K-临近算法当中。KNN算法是一个很古老的算法，这个过时的算法现在业界基本已经没人没有">
+<meta name="description" content="Kaggle Digit Recognizer 实战1.KNNKNN算法其实非常直观，就是看和哪个数字比较像，就判断为哪个数字，类似于我们的死记硬背模式。虽然有点土，但是理论上完全说得过去。 直观而言，KNN算法就是计算训练集中样本与测试集的特征维度空间距离（简称距离），最终选出与测试集距离排行最小的的K个样本，作为判断测试集的标准，是哪个数字就判断为哪个数字。 在测试过程中发现KNN运算耗时非常">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kaggle Digit Recognizer(PCA+SVM)">
-<meta property="og:url" content="http://www.maxfury.top/2018/03/23/2018-03-23/index.html">
+<meta property="og:title" content="Kaggle Digit Recognizer 总结">
+<meta property="og:url" content="http://yoursite.com/2018/03/23/2018-03-23/index.html">
 <meta property="og:site_name" content="The Sands of Time">
-<meta property="og:description" content="#Digit Recognizer 作为本人入门机器学习所做的第二个项目，并没有很难（毕竟是入门级），但却给了我很宝贵的实际操作经验，不仅认识了 KNN , LR ,SVM等三个算法的优缺点，亦学习到一种降维手段PCA。代码后面有空补上 ###1.KNN 第一次见到这个题目，就是在《机器学习实战》的第二章所描述的K-临近算法当中。KNN算法是一个很古老的算法，这个过时的算法现在业界基本已经没人没有">
+<meta property="og:description" content="Kaggle Digit Recognizer 实战1.KNNKNN算法其实非常直观，就是看和哪个数字比较像，就判断为哪个数字，类似于我们的死记硬背模式。虽然有点土，但是理论上完全说得过去。 直观而言，KNN算法就是计算训练集中样本与测试集的特征维度空间距离（简称距离），最终选出与测试集距离排行最小的的K个样本，作为判断测试集的标准，是哪个数字就判断为哪个数字。 在测试过程中发现KNN运算耗时非常">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-22T17:16:53.047Z">
+<meta property="og:updated_time" content="2018-04-21T11:13:56.279Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kaggle Digit Recognizer(PCA+SVM)">
-<meta name="twitter:description" content="#Digit Recognizer 作为本人入门机器学习所做的第二个项目，并没有很难（毕竟是入门级），但却给了我很宝贵的实际操作经验，不仅认识了 KNN , LR ,SVM等三个算法的优缺点，亦学习到一种降维手段PCA。代码后面有空补上 ###1.KNN 第一次见到这个题目，就是在《机器学习实战》的第二章所描述的K-临近算法当中。KNN算法是一个很古老的算法，这个过时的算法现在业界基本已经没人没有">
+<meta name="twitter:title" content="Kaggle Digit Recognizer 总结">
+<meta name="twitter:description" content="Kaggle Digit Recognizer 实战1.KNNKNN算法其实非常直观，就是看和哪个数字比较像，就判断为哪个数字，类似于我们的死记硬背模式。虽然有点土，但是理论上完全说得过去。 直观而言，KNN算法就是计算训练集中样本与测试集的特征维度空间距离（简称距离），最终选出与测试集距离排行最小的的K个样本，作为判断测试集的标准，是哪个数字就判断为哪个数字。 在测试过程中发现KNN运算耗时非常">
 
 
 
@@ -135,7 +135,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: false,
@@ -157,13 +157,13 @@
 
 
 
-  <link rel="canonical" href="http://www.maxfury.top/2018/03/23/2018-03-23/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/23/2018-03-23/"/>
 
 
 
 
 
-  <title>Kaggle Digit Recognizer(PCA+SVM) | The Sands of Time</title>
+  <title>Kaggle Digit Recognizer 总结 | The Sands of Time</title>
   
 
 
@@ -364,10 +364,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.maxfury.top/2018/03/23/2018-03-23/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/2018-03-23/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Leon Wu">
+      <meta itemprop="name" content="Leon">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/CropTmpFile-1477116557107.jpg">
     </span>
@@ -381,7 +381,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kaggle Digit Recognizer(PCA+SVM)</h1>
+          <h1 class="post-title" itemprop="name headline">Kaggle Digit Recognizer 总结</h1>
         
 
         <div class="post-meta">
@@ -450,18 +450,13 @@
       
 
       
-        <p>#Digit Recognizer</p>
-<p>作为本人入门机器学习所做的第二个项目，并没有很难（毕竟是入门级），但却给了我很宝贵的实际操作经验，不仅认识了 KNN , LR ,SVM等三个算法的优缺点，亦学习到一种降维手段PCA。代码后面有空补上</p>
-<p>###1.KNN</p>
-<p>第一次见到这个题目，就是在《机器学习实战》的第二章所描述的K-临近算法当中。KNN算法是一个很古老的算法，这个过时的算法现在业界基本已经没人没有使用了。但是作为入门学到的第一个算法，还是实践下比较好。</p>
-<p>KNN算法其实非常直观，就是看和哪个数字比较像，就判断为哪个数字，类似于我们的死记硬背模式。虽然有点土，但是理论上完全说得过去。</p>
+        <h1 id="Kaggle-Digit-Recognizer-实战"><a href="#Kaggle-Digit-Recognizer-实战" class="headerlink" title="Kaggle Digit Recognizer 实战"></a>Kaggle Digit Recognizer 实战</h1><h3 id="1-KNN"><a href="#1-KNN" class="headerlink" title="1.KNN"></a>1.KNN</h3><p>KNN算法其实非常直观，就是看和哪个数字比较像，就判断为哪个数字，类似于我们的死记硬背模式。虽然有点土，但是理论上完全说得过去。</p>
 <p>直观而言，KNN算法就是计算训练集中样本与测试集的特征维度空间距离（简称距离），最终选出与测试集距离排行最小的的K个样本，作为判断测试集的标准，是哪个数字就判断为哪个数字。</p>
 <p>在测试过程中发现KNN运算耗时非常久，久到离谱（我可以吃个饭再回来），因此对调试参数失去耐心，匆忙结束。</p>
 <p>最终得分有0.96左右</p>
-<p>###2.LR</p>
-<p>Logistic Regression也就是传说中的万金油算法，主要适用于线性问题，但应付各种题目都有不错的得分。</p>
+<h3 id="2-LR"><a href="#2-LR" class="headerlink" title="2.LR"></a>2.LR</h3><p>Logistic Regression就是传说中的万金油算法，主要适用于线性问题，但应付各种题目都有不错的得分。</p>
 <p>但是这里显然不太适合用LR，因为这个题目偏于非线性，但其实最后结果也不是很差。</p>
-<p>个人对这个算法的直观看法，就是评估每个像素点，颜色深一点可能偏向于判断目标数字，或者偏向其他数字。但其实数字对于人而言主要依靠结构识别。我们对于文字的识别大多是根据它们的结构，因此LR容易受到干扰的因素广泛存在。</p>
+<p>这个算法直观而言，就是评估每个像素点，颜色深一点可能偏向于判断目标数字，或者偏向其他数字。但其实数字对于人而言主要依靠结构识别。我们对于文字的识别大多是根据它们的结构，因此LR容易受到干扰的因素广泛存在。</p>
 <p>另外一个点 ，LR训练慢（相对于KNN以及SVM已经比较快了）但是测试快。最终得分能有0.92左右</p>
 <h3 id="3-PCA-SVM"><a href="#3-PCA-SVM" class="headerlink" title="3.PCA+SVM"></a>3.PCA+SVM</h3><p><strong>先说PCA</strong></p>
 <blockquote>
@@ -474,7 +469,9 @@
 <p>支持向量机算法的学习策略是在训练集中寻找一个超平面，将n维空间分隔开，两类不同的数据分处超平面的正负向，并使间隔最大化。而两类数据距离超平面最近的数据点，就是支持向量。</p>
 <p>最终得分0.98</p>
 <p>具体的介绍和数学推导可参考</p>
-<p><a href="https://blog.csdn.net/v_july_v/article/details/7624837" target="_blank" rel="noopener">https://blog.csdn.net/v_july_v/article/details/7624837</a></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/v_july_v/article/details/7624837" target="_blank" rel="noopener">支持向量机导论</a></p>
+</blockquote>
 <p>代码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span>  numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment">#import time</span></span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="comment">#read data</span></span><br><span class="line">pca=PCA(n_components=<span class="number">0.95</span>,whiten=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'reading data...'</span>)</span><br><span class="line">train = pd.read_csv(<span class="string">"D:/python learning/digit/train .csv"</span>)</span><br><span class="line">test = pd.read_csv(<span class="string">"D:/python learning/digit/test .csv"</span>)</span><br><span class="line">label = train.values[<span class="number">0</span>:,<span class="number">0</span>].astype(int)</span><br><span class="line">data_train = train.values[<span class="number">0</span>:,<span class="number">1</span>:].astype(int)</span><br><span class="line">data_test = test.values[:,:].astype(int)</span><br><span class="line"></span><br><span class="line">pca.fit(data_train)</span><br><span class="line">train_data=pca.transform(data_train)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'training svc...'</span>)</span><br><span class="line">svc=SVC()</span><br><span class="line">svc.fit(train_data,label)</span><br><span class="line"></span><br><span class="line">data_test=pca.transform(data_test)</span><br><span class="line">ans = svc.predict(data_test)</span><br><span class="line"></span><br><span class="line">a=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(ans)):</span><br><span class="line">    a.append(i+<span class="number">1</span>)</span><br><span class="line">np.savetxt(<span class="string">'PCA_0.95_SVC.csv'</span>,np.c_[a,ans],delimiter=<span class="string">','</span>,header=<span class="string">'ImageId,Label'</span>,comments=<span class="string">''</span>,fmt=<span class="string">'%d'</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'finished'</span>)</span><br></pre></td></tr></table></figure>
 
@@ -501,8 +498,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/12/2018-3-12/" rel="next" title="leetcode 初体验">
-                <i class="fa fa-chevron-left"></i> leetcode 初体验
+              <a href="/2018/03/18/2018-3-18/" rel="next" title="Kaggle HousePrice 实战">
+                <i class="fa fa-chevron-left"></i> Kaggle HousePrice 实战
               </a>
             
           </div>
@@ -579,9 +576,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/images/CropTmpFile-1477116557107.jpg"
-                alt="Leon Wu" />
+                alt="Leon" />
             
-              <p class="site-author-name" itemprop="name">Leon Wu</p>
+              <p class="site-author-name" itemprop="name">Leon</p>
               <p class="site-description motion-element" itemprop="description">你是不是缺心眼儿</p>
           </div>
 
@@ -592,7 +589,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -613,6 +610,12 @@
                     <a href="https://music.163.com/#/user/home?id=99959008" target="_blank" title="网易云音乐">
                       
                         <i class="fa fa-fw fa-globe"></i>网易云音乐</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.bilibili.com/video/av6211226/" target="_blank" title="尼古拉·特斯拉：发明了现代世界的人">
+                      
+                        <i class="fa fa-fw fa-globe"></i>尼古拉·特斯拉：发明了现代世界的人</a>
                   </span>
                 
             </div>
@@ -661,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-PCA-SVM"><span class="nav-number">1.</span> <span class="nav-text">3.PCA+SVM</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kaggle-Digit-Recognizer-实战"><span class="nav-number">1.</span> <span class="nav-text">Kaggle Digit Recognizer 实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-KNN"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.KNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LR"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.LR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-PCA-SVM"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.PCA+SVM</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -685,7 +688,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Leon Wu</span>
+  <span class="author" itemprop="copyrightHolder">Leon</span>
 
   
 </div>
@@ -695,7 +698,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a>
 <span>   |   </span>
 <span id="showDays"></span>
 </div>
@@ -1204,6 +1207,8 @@
   
 
   
+  
+
 
   
 
