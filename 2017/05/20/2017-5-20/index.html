@@ -124,7 +124,7 @@
 <meta property="og:site_name" content="The Sands of Time">
 <meta property="og:description" content="机器学习理解 朴素贝叶斯（Naive Bayes）-1 本文包括  朴素贝叶斯背后的数学原理  朴素贝叶斯概述众所周知，朴素贝叶斯是一种简单但是非常强大的线性分类器。它在垃圾邮件分类，疾病诊断中都取得了很大的成功。它只所以称为朴素，是因为它假设特征之间是相互独立的，但是在现实生活中，这种假设基本上是不成立的。那么即使是在假设不成立的条件下，它依然表现的很好，尤其是在小规模样本的情况下。但是，如果每">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-21T11:25:38.798Z">
+<meta property="og:updated_time" content="2018-05-11T10:33:49.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 朴素贝叶斯（Naive Bayes）-1">
 <meta name="twitter:description" content="机器学习理解 朴素贝叶斯（Naive Bayes）-1 本文包括  朴素贝叶斯背后的数学原理  朴素贝叶斯概述众所周知，朴素贝叶斯是一种简单但是非常强大的线性分类器。它在垃圾邮件分类，疾病诊断中都取得了很大的成功。它只所以称为朴素，是因为它假设特征之间是相互独立的，但是在现实生活中，这种假设基本上是不成立的。那么即使是在假设不成立的条件下，它依然表现的很好，尤其是在小规模样本的情况下。但是，如果每">
@@ -472,8 +472,8 @@
 <p>下面我将分别解释上面的三个概率。</p>
 <h4 id="条件概率conditional-probabilities"><a href="#条件概率conditional-probabilities" class="headerlink" title="条件概率conditional-probabilities"></a>条件概率conditional-probabilities</h4><p>随机变量的独立性意味着我告诉你一个变量的出现，并不影响你相信另一个出现的可能。最简单的一个例子就是抛硬币，也就是第一次的反正面并不会影响你再一次抛出现反正面的概率（也就是0.5）。</p>
 <p>朴素贝叶斯模型中，特征之间不仅仅是独立的，而且是加条件的独立的。比如说：我的特征向量x中，有n个特征x中，有n个特征x中，有n个特征，那么我可以把概率写成下面的形式：<br>$$<br>P(x|ωj)=P(x1|ωj)∗P(x2|ωj)∗P(x3|ωj)∗⋯∗P(xn|ωj)=∏_{k=1}^{n}P(xk|ωj)P(x|ωj)<br>$$</p>
-<p>$$<br>P(x|ωj)P(x|ωj)P(x|\omega*j)<br>$$</p>
-<p>$P(x|ωj)$的概率可以理解成：在给定属于某个类别的条件下，观察到出现现象xxx的概率。在特征向量中的每个特点的概率都可以通过极大似然估计（maximum-likelihood estimate）来求得，也就是简单地求某个特征在某个类别中的频率，公式如下：<br>$$<br>P(x_i|\omega_j) = \frac{N_{x_i|\omega_j}}{N_{\omega_j}} \qquad (i = (1, \dots, n))<br>$$</p>
+<p>$P(x|ωj)$的概率可以理解成：在给定属于某个类别的条件下，观察到出现现象xxx的概率。在特征向量中的每个特点的概率都可以通过极大似然估计（maximum-likelihood estimate）来求得，也就是简单地求某个特征在某个类别中的频率，公式如下：</p>
+<p>$$<br>P(x_i|\omega_j) = \frac{N_{x_i|\omega_j}}{N_{\omega_j}} \qquad (i = (1, \dots, n))<br>$$</p>
 <ul>
 <li>$Nxi|ωj$ :在所有属于类别ωj的训练样本中，特征xi出现的次数</li>
 <li>$Nωj$：在所有属于类别ωj的训练样本中，所有特征出现的次数</li>
@@ -526,9 +526,10 @@
 </tbody>
 </table>
 <hr>
-<p>现在要求$P(buy,deal|spam)$这个概率，通过条件的独立性和极大似然估计，可以求出这个概率：<br>$$<br>P(buy, deal|spam) = P(buy|spam) <em>P(deal|spam) = \frac{1+1}{1+1+1+1} </em>\frac{1}{1+1+1+1} = \frac{1}{8}<br>$$</p>
+<p>现在要求$P(buy,deal|spam)$这个概率，通过条件的独立性和极大似然估计，可以求出这个概率：</p>
+<p>$$<br>P(buy, deal|spam) = P(buy|spam) <em>P(deal|spam) = \frac{1+1}{1+1} </em>\frac{1}{1+1} = \frac{1}{2}<br>$$</p>
 <h3 id="先验概率-Prior-Probabilities"><a href="#先验概率-Prior-Probabilities" class="headerlink" title="先验概率(Prior Probabilities)"></a>先验概率(Prior Probabilities)</h3><p>先验概率道理其实很简单，在上面的那个垃圾邮件的例子中，可以用极大似然估计来求得：$\frac{2}{4}$,通式如下：</p>
-<p>$$<br>p(\omega_j) = \frac{N_{\omega_j}}{N*c}<br>$$</p>
+<p>$$<br>p(\omega_j) = \frac{N_{\omega_j}}{Nc}<br>$$</p>
 <ul>
 <li>$Nωj$：属于类ωj的样本数Nωj</li>
 <li>$Nc$：所有的样本数</li>
@@ -538,7 +539,7 @@
 <h5 id="现象概率evidence-probabilities"><a href="#现象概率evidence-probabilities" class="headerlink" title="现象概率evidence-probabilities"></a>现象概率evidence-probabilities</h5><p>现象概率是独立于类别的。比如上面那个垃圾邮件的例子，我想知道$P(deal)$这个现象发生的概率，我只需要找出我所有的样本中出现$deal$这个特征的概率，与属于哪个类别没有任何关系。</p>
 <p>其实完全没有必要算出这个概率，因为要求属于哪个类别的概率最大，而在这个过程中，它对于每次计算类别的概率中（也就是$P(ωj|xi$）都是常量，所以它不会影响到最终的决策。</p>
 <h5 id="加上平滑additive-smoothing"><a href="#加上平滑additive-smoothing" class="headerlink" title="加上平滑additive-smoothing"></a>加上平滑additive-smoothing</h5><p>还是上面那个邮件的例子，假设要求 $P(love|spam)$ ,会发现，在垃圾邮件中并没有出现love这个词，因此概率为0，如果这个条件概率为0，那么整个后验概率就为0。为了避免0概率的发生，可以加上平滑项。把上面条件概率的公式改为下面的形式：</p>
-<p>$$P(x_i|\omega_j) = \frac{N_{x_i|\omega_j} + \alpha}{N_{\omega_j} + \alpha n} \qquad (i = (1, \dots, n)) $$</p>
+<p>$$<br>P(x_i|\omega_j) = \frac{N_{x_i|\omega_j} + \alpha}{N_{\omega_j} + \alpha n} \qquad (i = (1, \dots, n))<br>$$</p>
 <ul>
 <li>$Nx_i|ω_j$  :在所有属于类别ωj的训练样本中，特征xi出现的次数</li>
 <li>$Nωj$：在所有属于类别ωj的训练样本中，所有特征出现的次数</li>
@@ -665,7 +666,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

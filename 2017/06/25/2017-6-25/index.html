@@ -124,12 +124,10 @@
 <meta property="og:site_name" content="The Sands of Time">
 <meta property="og:description" content="机器学习 理解 朴素贝叶斯（Naive Bayes）-2引言主要包括将朴素贝叶斯模型应用到文本分类任务的技巧和方法。 词袋模型(The Bag of Words Model)对于机器学习算法来说，特征的选择是一个很重要的过程。那么如何从文本训练集中选出好的特征呢？在自然语言处理中，一个常见的模型就是词袋模型。 这个模型很简单，就是收集训练集中所有的词（重复地只保留一个词），收集的这些词中，每个词都">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdn.net/20160427232102606">
-<meta property="og:updated_time" content="2018-04-21T11:25:52.204Z">
+<meta property="og:updated_time" content="2018-05-11T10:26:44.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 朴素贝叶斯（Naive Bayes）-2">
 <meta name="twitter:description" content="机器学习 理解 朴素贝叶斯（Naive Bayes）-2引言主要包括将朴素贝叶斯模型应用到文本分类任务的技巧和方法。 词袋模型(The Bag of Words Model)对于机器学习算法来说，特征的选择是一个很重要的过程。那么如何从文本训练集中选出好的特征呢？在自然语言处理中，一个常见的模型就是词袋模型。 这个模型很简单，就是收集训练集中所有的词（重复地只保留一个词），收集的这些词中，每个词都">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20160427232102606">
 
 
 
@@ -467,23 +465,24 @@
 <ol>
 <li>词干提取(Stemming)：它的意思就是把swim和swimming看作是一个单词。它会把每个相近的词提取主干，并把它们当作一个词。</li>
 <li>词元化(Lemmatization)：它的目的是把让单词之间的语法符合规范。</li>
-<li>N-Gram：这个百度百科上有详细的解释：<a href="http://baike.baidu.com/view/1394579.htm" target="_blank" rel="noopener">http://baike.baidu.com/view/1394579.htm</a>  下图是英文单词的例子：</li>
+<li>N-Gram：这个百度百科上有详细的解释：<a href="http://baike.baidu.com/view/1394579.htm" target="_blank" rel="noopener">http://baike.baidu.com/view/1394579.htm</a> </li>
 </ol>
-<p><img src="https://img-blog.csdn.net/20160427232102606" alt="机器学习算法之朴素贝叶斯"></p>
 <p>在实际分类中，词干提取和词元化对分类的性能几乎不会产生什么影响。上面的方法有的不适用于中文的情况。</p>
 <h2 id="Multi-variate-Bernoulli-Naive-Bayes"><a href="#Multi-variate-Bernoulli-Naive-Bayes" class="headerlink" title="Multi-variate Bernoulli Naive Bayes"></a>Multi-variate Bernoulli Naive Bayes</h2><p>这个模型检查词汇表的词是否在文档中出现。根据伯努利实验， 有如下公式：</p>
-<p>$$<br>P(x|ωj)=∏i=1mP(xi|ωj)b∗(1−P(xi|ωj))(1−b)(b∈0,1)<br>$$<br>$$<br>P(x|\omega_j) = \prod^m_{i=1}P(x_i|\omega_j)^b * (1 - P(x_i|\omega_j))^{(1 - b)} \qquad (b \in 0, 1)<br>$$</p>
+<p>$$<br>P(x|ωj)=∏i=1mP(xi|ωj)b∗(1−P(xi|ωj))(1−b)(b∈0,1)<br>$$</p>
+<p>$$<br>P(x|\omega_j) = \prod^m_{i=1}P(x_i|\omega_j)^b * (1 - P(x_i|\omega_j))^{(1 - b)} \qquad (b \in 0, 1)<br>$$</p>
 <p>上式中的m是词汇表中单词的数量。</p>
-<p>$$<br>P(xi|ωj)=Nxi|wj+1Nwj+2<br>$$<br>$$<br>P(x_i|\omega_j) = \frac{N_{x_i|w_j} + 1}{N_{w_j} + 2}<br>$$</p>
+<p>$$<br>P(xi|ωj)=Nxi|wj+1Nwj+2<br>$$</p>
+<p>$$<br>P(x_i|\omega_j) = \frac{N_{x_i|w_j} + 1}{N_{w_j} + 2}<br>$$</p>
 <ul>
 <li>$Nxi|wjN_{x_i|w_j}$：训练集中包含特征xix_i并属于类别ωj\omega_j样本的数量</li>
 <li>$NwjN_{w_j}$：训练集中属于类别ωj\omega_j样本的数量</li>
-<li>+1、+2+1、+2是Laplace平滑参数</li>
+<li>+1、+2是Laplace平滑参数</li>
 </ul>
 <h2 id="Multinomial-Naive-Bayes"><a href="#Multinomial-Naive-Bayes" class="headerlink" title="Multinomial Naive Bayes"></a>Multinomial Naive Bayes</h2><p>这个模型检查词汇表的词在文档中出现的次数。它也叫做词频(term frequency)，记作(tf(t, d))，表示词t在文档d中出现的次数。它也叫做自然频率分布(raw frequency)。在实际应用中，为了使算法具有更好的性能，词频经常被标准化，公式如下：</p>
 <p>$$<br>\frac{tf(t,d)}{n_d}<br>$$</p>
 <ul>
-<li>$tf(t,d)$$：词t在文档d中出现的次数</li>
+<li>$tf(t,d)$：词t在文档d中出现的次数</li>
 <li>$n_d$：文档d中词的总数量</li>
 </ul>
 <p>上述中的词都是指词汇表中的词，并不是文档中所有出现的单词。</p>
@@ -501,7 +500,7 @@
 <p>$Tf-idf$可以通过朴素贝叶斯应用到文本分类中，公式如下：</p>
 <p>$Tf-idf = tf_n(t,d) * idf(t)$</p>
 <ul>
-<li>$tf_n(t,d)$$是正则化后的词频</li>
+<li>$tf_n(t,d)$ 是正则化后的词频</li>
 <li>$idf(t)$可通过如下公式计算</li>
 </ul>
 <p>$idf(t) = log \left( \frac{n_d}{n_d(t)} \right)$</p>
@@ -545,8 +544,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/12/2018-3-12/" rel="prev" title="leetcode 初体验">
-                leetcode 初体验 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/18/2018-3-18/" rel="prev" title="Kaggle HousePrice 房价预测">
+                Kaggle HousePrice 房价预测 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -630,7 +629,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
